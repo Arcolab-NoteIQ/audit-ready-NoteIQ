@@ -263,66 +263,169 @@
   <!-- PAGE CONTENT -->
   <main>
 
-    <!-- Form & Features (section 2) -->
-    <section id="form-section" aria-labelledby="form-heading">
-      <div class="container">
-        <div class="split">
-          <!-- LEFT: catchy heading + features -->
-          <div class="hero" id="form-left">
-            <h1 id="form-heading">Turn notes into action with NoteIQ</h1>
-            <p>Capture, summarize and act on customer conversations automatically. Faster handoffs, better insights & zero friction.</p>
+    <!-- Form & Features (UPDATED SECTION 2) -->
+<section id="form-section" aria-labelledby="form-heading"
+         style="background:#ffffff; padding:40px 0;">
+  <div class="container">
+    <div class="split" style="
+      display:grid;
+      grid-template-columns: 1fr 460px;
+      gap:40px;
+      align-items:start;
+    ">
+      
+      <!-- LEFT: catchy heading + features -->
+      <div class="hero" id="form-left" style="color:#0d3b2c;">
+        <h1 id="form-heading" style="margin:0 0 16px 0; font-size:42px; font-weight:800;">
+          Turn notes into action with NoteIQ
+        </h1>
+        <p style="max-width:55ch; color:#1a1a1a; margin-bottom:28px;">
+          Capture, summarize and act on customer conversations automatically. 
+          Faster handoffs, better insights & zero friction.
+        </p>
 
-            <!-- Features: four dummy features you can edit -->
-            <div class="features" aria-hidden="false">
-              <div class="feature">
-                <div class="icon">A</div>
-                <div>
-                  <h4>Feature One</h4>
-                  <p>Auto-summarize meetings into crisp action items and follow-ups.</p>
-                </div>
-              </div>
-
-              <div class="feature">
-                <div class="icon">B</div>
-                <div>
-                  <h4>Feature Two</h4>
-                  <p>Intelligent search across notes so nothing is ever lost.</p>
-                </div>
-              </div>
-
-              <div class="feature">
-                <div class="icon">C</div>
-                <div>
-                  <h4>Feature Three</h4>
-                  <p>Integrates with your CRM to auto-log the important bits.</p>
-                </div>
-              </div>
-
-              <div class="feature">
-                <div class="icon">D</div>
-                <div>
-                  <h4>Feature Four</h4>
-                  <p>Shareable insights that turn into trackable tasks instantly.</p>
-                </div>
-              </div>
+        <!-- Features (STACKED VERTICALLY NOW) -->
+        <div class="features" style="
+          display:flex;
+          flex-direction:column;
+          gap:14px;
+        ">
+          
+          <!-- Feature item -->
+          <div class="feature" style="
+            background:#f4f7f6;
+            padding:16px;
+            border-radius:10px;
+            display:flex;
+            gap:12px;
+            align-items:flex-start;
+            border:1px solid #e3e8e6;
+          ">
+            <div class="icon" style="
+              min-width:40px;
+              height:40px;
+              border-radius:8px;
+              background:#1a9f70;
+              color:#ffffff;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              font-weight:700;
+              font-size:1rem;
+            ">A</div>
+            <div>
+              <h4 style="margin:0 0 4px 0; font-size:1.05rem; color:#113b2b;">Feature One</h4>
+              <p style="margin:0; color:#333;">Auto-summarize meetings into crisp action items and follow-ups.</p>
             </div>
           </div>
 
-          <!-- RIGHT: form script container -->
-          <div class="form-wrap" aria-label="Signup form">
-            <!-- IMPORTANT: this is the exact script you provided. Do not change the id or crossorigin unless you know why. -->
-            <div id="fs-form-root" style="min-height:320px; display:flex; align-items:center; justify-content:center;">
-              <script src="https://arco-lab.myfreshworks.com/crm/sales/web_forms/2bd2509a7e16f4e8cbd7b953ae3f8e824d5e574d07bb9581ec1798103bc08f57/form.js"
-                      crossorigin="anonymous"
-                      id="fs_2bd2509a7e16f4e8cbd7b953ae3f8e824d5e574d07bb9581ec1798103bc08f57"></script>
+          <!-- Feature item -->
+          <div class="feature" style="
+            background:#f4f7f6;
+            padding:16px;
+            border-radius:10px;
+            display:flex;
+            gap:12px;
+            align-items:flex-start;
+            border:1px solid #e3e8e6;
+          ">
+            <div class="icon" style="
+              min-width:40px;
+              height:40px;
+              border-radius:8px;
+              background:#1a9f70;
+              color:#ffffff;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              font-weight:700;
+              font-size:1rem;
+            ">B</div>
+            <div>
+              <h4 style="margin:0 0 4px 0; font-size:1.05rem; color:#113b2b;">Feature Two</h4>
+              <p style="margin:0; color:#333;">Intelligent search across notes so nothing is ever lost.</p>
             </div>
-            <noscript style="color:#666; font-size:0.95rem; margin-top:12px; display:block;">
-              Please enable JavaScript to see the form.
-            </noscript>
           </div>
+
+          <!-- Feature item -->
+          <div class="feature" style="
+            background:#f4f7f6;
+            padding:16px;
+            border-radius:10px;
+            display:flex;
+            gap:12px;
+            border:1px solid #e3e8e6;
+            align-items:flex-start;
+          ">
+            <div class="icon" style="
+              min-width:40px;
+              height:40px;
+              border-radius:8px;
+              background:#1a9f70;
+              color:#ffffff;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              font-weight:700;
+              font-size:1rem;
+            ">C</div>
+            <div>
+              <h4 style="margin:0 0 4px 0; font-size:1.05rem; color:#113b2b;">Feature Three</h4>
+              <p style="margin:0; color:#333;">Integrates with your CRM to auto-log the important bits.</p>
+            </div>
+          </div>
+
+          <!-- Feature item -->
+          <div class="feature" style="
+            background:#f4f7f6;
+            padding:16px;
+            border-radius:10px;
+            display:flex;
+            gap:12px;
+            border:1px solid #e3e8e6;
+            align-items:flex-start;
+          ">
+            <div class="icon" style="
+              min-width:40px;
+              height:40px;
+              border-radius:8px;
+              background:#1a9f70;
+              color:#ffffff;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              font-weight:700;
+              font-size:1rem;
+            ">D</div>
+            <div>
+              <h4 style="margin:0 0 4px 0; font-size:1.05rem; color:#113b2b;">Feature Four</h4>
+              <p style="margin:0; color:#333;">Shareable insights that turn into trackable tasks instantly.</p>
+            </div>
+          </div>
+
         </div>
       </div>
-    </section>
+
+      <!-- RIGHT: form script container -->
+      <div class="form-wrap" aria-label="Signup form" style="
+        background:#ffffff;
+        border-radius:12px;
+        padding:18px;
+        box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        border:1px solid #e8eceb;
+      ">
+        <div id="fs-form-root" style="min-height:320px;">
+          <script src="https://arco-lab.myfreshworks.com/crm/sales/web_forms/2bd2509a7e16f4e8cbd7b953ae3f8e824d5e574d07bb9581ec1798103bc08f57/form.js"
+                  crossorigin="anonymous"
+                  id="fs_2bd2509a7e16f4e8cbd7b953ae3f8e824d5e574d07bb9581ec1798103bc08f57">
+          </script>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
     <!-- Why should you trust us? (section 3) -->
     <section id="trust" aria-labelledby="trust-heading">
