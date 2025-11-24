@@ -364,6 +364,90 @@
       text-align:center;
     }
 
+    .more-about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.advantages-card, .modules-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px 32px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.advantages-title,
+.modules-title {
+  margin-top: 0;
+  font-size: 22px;
+  color: #0f2b24;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+/* Left column list */
+.advantages-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.advantages-list li {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 1.05rem;
+  color: #2c3b3a;
+}
+.star {
+  font-size: 1.3rem;
+  color: #f7c200;
+}
+
+/* Tab control */
+.module-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.module-tab {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all .2s ease;
+}
+
+.module-tab.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary-600);
+}
+
+/* Panels */
+.module-panel {
+  display: none;
+}
+.module-panel.active {
+  display: block;
+}
+
+.module-panel h4 {
+  margin: 0 0 8px 0;
+  color: #0f3b2b;
+}
+
+@media (max-width: 900px) {
+  .more-about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
     .glimpse-modal{
       position:fixed;
       inset:0;
@@ -709,56 +793,60 @@ a[href^="mailto:"]{ color:inherit; text-decoration:underline; }
     </section>
 
     <!-- Some glimpses from our product (with modal) -->
-    <section id="glimpses" aria-labelledby="glimpses-heading">
-      <div class="container">
-        <h2 id="glimpses-heading">Some glimpses from our product</h2>
+    <section id="more-about" aria-labelledby="more-about-heading" style="background:#ffffff;">
+  <div class="container">
+    <h2 id="more-about-heading" style="text-align:center; margin-bottom:32px; font-size:32px; font-weight:700;">
+      More About NoteIQ
+    </h2>
 
-        <div class="glimpse-grid-large" role="list" aria-label="Product glimpses">
-          <figure class="glimpse-item" role="listitem">
-            <button class="glimpse-btn" data-src="images/screenshots/audit-trails.png"
-                    data-caption="Comprehensive Audit Trails"
-                    aria-label="Comprehensive Audit Trails">
-              <img src="images/screenshots/audit-trails.png"
-                   alt="Product screenshot 1" />
-            </button>
-            <figcaption class="glimpse-caption">Comprehensive Audit Trails</figcaption>
-          </figure>
+    <div class="more-about-grid">
+      
+      <!-- LEFT COLUMN -->
+      <div class="advantages-card">
+        <h3 class="advantages-title">NoteIQ Platform Advantages</h3>
 
-          <figure class="glimpse-item" role="listitem">
-            <button class="glimpse-btn" data-src="images/screenshots/e-signature.png"
-                    data-caption="Electronic Signatures for Process Approvals"
-                    aria-label="Electronic Signatures for Process Approvals">
-              <img src="images/screenshots/e-signature.png"
-                   alt="Product screenshot 2" />
-            </button>
-            <figcaption class="glimpse-caption">Electronic Signatures for Process Approvals</figcaption>
-          </figure>
-
-          <figure class="glimpse-item" role="listitem">
-            <button class="glimpse-btn" data-src="images/screenshots/repository-page.png"
-                    data-caption="Document Repository for file management"
-                    aria-label="Document Repository for file management">
-              <img src="images/screenshots/repository-page.png"
-                   alt="Product screenshot 3" />
-            </button>
-            <figcaption class="glimpse-caption">Document Repository for file management</figcaption>
-          </figure>
-        </div>
+        <ul class="advantages-list">
+          <li><span class="star">⭐</span> Streamlined workflows for rapid validation</li>
+          <li><span class="star">⭐</span> Enterprise-grade encryption and access control</li>
+          <li><span class="star">⭐</span> Modular platform built for scalability</li>
+          <li><span class="star">⭐</span> Built-in reporting & automated audit readiness</li>
+        </ul>
       </div>
 
-      <!-- Modal -->
-      <div id="glimpse-modal" class="glimpse-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="glimpse-modal-caption">
-        <div class="glimpse-modal-backdrop" data-close="true"></div>
-        <div class="glimpse-modal-panel" role="document">
-          <button class="glimpse-modal-close" aria-label="Close enlarged image">&times;</button>
-          <div class="glimpse-modal-content">
-            <img id="glimpse-modal-img" src="" alt="" />
-            <p id="glimpse-modal-caption" class="glimpse-modal-caption"></p>
+      <!-- RIGHT COLUMN -->
+      <div class="modules-card">
+        <h3 class="modules-title">Our Other Modules</h3>
+
+        <!-- TAB HEADERS -->
+        <div class="module-tabs">
+          <button class="module-tab active" data-target="dms">DMS</button>
+          <button class="module-tab" data-target="tms">TMS</button>
+        </div>
+
+        <!-- TAB CONTENT -->
+        <div class="module-content">
+          <div class="module-panel active" id="dms">
+            <h4>Document Management System (DMS)</h4>
+            <p>
+              Organize, store, version, and control documentation with built-in approval flows.
+              Supports compliance, audit trails, and structured document lifecycles.
+            </p>
+          </div>
+
+          <div class="module-panel" id="tms">
+            <h4>Training Management System (TMS)</h4>
+            <p>
+              Assign, track, and certify team training with automated reminders and compliance logs.
+              Designed for regulated teams needing complete training traceability.
+            </p>
           </div>
         </div>
       </div>
 
-    </section>
+    </div>
+  </div>
+</section>
+
 
     <!-- Get in touch (section 5) -->
     <section id="contact" aria-labelledby="contact-heading">
@@ -816,6 +904,20 @@ a[href^="mailto:"]{ color:inherit; text-decoration:underline; }
         { boxShadow: '0 10px 30px rgba(0,0,0,0.08)' }
       ], { duration: 1600, iterations: 1, easing: 'ease-in-out' });
     })();
+
+    document.querySelectorAll('.module-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    
+    // Toggle tab active class
+    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    // Toggle panel
+    const target = tab.getAttribute('data-target');
+    document.querySelectorAll('.module-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(target).classList.add('active');
+  });
+});
 
     // Glimpse modal logic
     (function(){
