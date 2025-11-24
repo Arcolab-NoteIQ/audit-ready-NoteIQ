@@ -309,16 +309,42 @@
       opacity:0.95;
     }
 
-    .module-panel { display:none; color:#17312c; }
-    .module-panel.active { display:block; }
+    .module-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
 
-    .module-tab:focus { box-shadow: 0 6px 18px rgba(26,159,112,0.12); transform: translateY(-4px); color:var(--tab-active-purple); }
+.module-tab {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all .2s ease;
+}
 
-    @media (max-width:900px){
-      .more-about-grid { grid-template-columns:1fr; }
-      .module-tabs-wrap { gap:10px; padding-top:12px; padding-bottom:6px; }
-      .tabs-screenshot{ display:none; }
-    }
+.module-tab.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary-600);
+}
+
+.module-panel {
+  display: none;
+  color: #17312c;
+}
+
+.module-panel.active {
+  display: block;
+}
+
+.module-panel h4 {
+  margin: 0 0 8px 0;
+  color: #0f3b2b;
+}
+
 
     /* Modal (kept intact) */
     .glimpse-modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:9999; pointer-events:none; }
@@ -471,27 +497,34 @@
             </ul>
           </div>
 
-          <!-- RIGHT -->
-          <div class="modules-card">
-            <h3 class="modules-title">Our Other Modules</h3>
+          <!-- RIGHT COLUMN: modules reverted to button layout -->
+<div class="modules-card">
+  <h3 class="modules-title">Our Other Modules</h3>
 
-            <div class="module-tabs-wrap" role="tablist" aria-label="Other modules">
-              <button class="module-tab" role="tab" aria-selected="true" data-target="dms" id="tab-dms">DMS</button>
-              <button class="module-tab" role="tab" aria-selected="false" data-target="tms" id="tab-tms">TMS</button>
-            </div>
+  <div class="module-tabs">
+    <button class="module-tab active" data-target="dms">DMS</button>
+    <button class="module-tab" data-target="tms">TMS</button>
+  </div>
 
-            <div class="module-content" aria-live="polite">
-              <div class="module-panel active" id="dms" role="tabpanel" aria-labelledby="tab-dms">
-                <h4>Document Management System (DMS)</h4>
-                <p>Organize, store, version, and control documentation with built-in approval flows. Supports compliance, audit trails, and structured document lifecycles.</p>
-              </div>
+  <div class="module-content">
+    <div class="module-panel active" id="dms">
+      <h4>Document Management System (DMS)</h4>
+      <p>
+        Organize, store, version, and control documentation with built-in approval flows.
+        Supports compliance, audit trails, and structured document lifecycles.
+      </p>
+    </div>
 
-              <div class="module-panel" id="tms" role="tabpanel" aria-labelledby="tab-tms" hidden>
-                <h4>Training Management System (TMS)</h4>
-                <p>Assign, track, and certify team training with automated reminders and compliance logs. Designed for regulated teams needing complete training traceability.</p>
-              </div>
-            </div>
-          </div>
+    <div class="module-panel" id="tms">
+      <h4>Training Management System (TMS)</h4>
+      <p>
+        Assign, track, and certify team training with automated reminders and compliance logs.
+        Designed for regulated teams needing complete training traceability.
+      </p>
+    </div>
+  </div>
+</div>
+
         </div>
       </div>
     </section>
@@ -548,52 +581,23 @@
     })();
 
     // Accessible tab switching (single, consolidated handler)
-    (function(){
-      const tabs = document.querySelectorAll('.module-tab');
-      const panels = document.querySelectorAll('.module-panel');
+    document.querySelectorAll('.module-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
 
-      function activateTab(tab){
-        const target = tab.getAttribute('data-target');
+    document.querySelectorAll('.module-tab').forEach(t =>
+      t.classList.remove('active')
+    );
+    tab.classList.add('active');
 
-        tabs.forEach(t => {
-          const selected = (t === tab);
-          t.setAttribute('aria-selected', selected ? 'true' : 'false');
-          if (selected) t.classList.add('active'); else t.classList.remove('active');
-        });
+    const target = tab.getAttribute('data-target');
 
-        panels.forEach(p => {
-          if (p.id === target){
-            p.removeAttribute('hidden');
-            p.classList.add('active');
-          } else {
-            p.setAttribute('hidden','');
-            p.classList.remove('active');
-          }
-        });
+    document.querySelectorAll('.module-panel').forEach(p =>
+      p.classList.remove('active')
+    );
+    document.getElementById(target).classList.add('active');
+  });
+});
 
-        const panel = document.getElementById(target);
-        if (panel){
-          const focusable = panel.querySelector('a, button, input, textarea, select, [tabindex]') || panel;
-          if (focusable) focusable.focus({preventScroll:true});
-        }
-      }
-
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => activateTab(tab));
-        tab.addEventListener('keydown', (ev) => {
-          if (ev.key === 'Enter' || ev.key === ' ') {
-            ev.preventDefault();
-            activateTab(tab);
-          }
-          // left/right arrow support
-          if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft'){
-            ev.preventDefault();
-            const idx = Array.from(tabs).indexOf(tab);
-            const nextIdx = ev.key === 'ArrowRight' ? (idx+1)%tabs.length : (idx-1+tabs.length)%tabs.length;
-            tabs[nextIdx].focus();
-          }
-        });
-      });
 
       // ensure initial state consistent with markup
       const initial = document.querySelector('.module-tab[aria-selected="true"]') || tabs[0];
