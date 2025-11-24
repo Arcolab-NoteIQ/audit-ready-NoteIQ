@@ -230,53 +230,117 @@
       cursor:pointer;
       border:none;
     }
-    .glimpse-img {
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 3px solid rgba(255,255,255,0.15);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.20);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+    /* Carousel styles */
+.carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
 }
 
-.glimpse-img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.28);
-}
-
-/* Caption styling */
-.glimpse-caption {
-  margin-top: 10px;
+/* Prev / Next buttons */
+.carousel-btn {
+  background: rgba(255,255,255,0.12);
   color: #ffffff;
-  opacity: 0.9;
-  font-size: 1rem;
-}
-
-/* Fullscreen modal viewer */
-#img-viewer {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  display: none;
+  border: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
-  cursor: zoom-out;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+.carousel-btn:focus { outline: 3px solid rgba(255,255,255,0.18); }
+.carousel-btn:hover { transform: translateY(-3px); }
+
+/* Track wrapper masks overflow */
+.carousel-track-wrapper {
+  overflow: hidden;
+  flex: 1;
 }
 
-#img-viewer img {
-  max-width: 92%;
-  max-height: 92%;
+/* Track (flex row of slides) */
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  transition: transform 400ms cubic-bezier(.2,.9,.3,1);
+  will-change: transform;
+}
+
+/* Individual slide */
+.carousel-slide {
+  min-width: calc((100% - 40px) / 3); /* show 3 slides with gaps on large screens */
+  box-sizing: border-box;
+  display: block;
+}
+
+/* Figure and image */
+.carousel-slide figure {
+  margin: 0;
+  text-align: center;
+}
+.carousel-slide img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-  animation: fadeIn 0.25s ease;
+  border: 3px solid rgba(255,255,255,0.06);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+  display: block;
+  transition: transform 250ms ease;
+}
+.carousel-slide img:hover { transform: scale(1.02); }
+
+/* Caption */
+.carousel-slide figcaption {
+  margin-top: 10px;
+  color: #ffffff;
+  opacity: 0.95;
+  font-size: 0.98rem;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to   { opacity: 1; transform: scale(1); }
+/* Dots */
+.carousel-dots {
+  display:flex;
+  gap:8px;
+  margin-left:12px;
 }
+.carousel-dot {
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background: rgba(255,255,255,0.22);
+  cursor:pointer;
+  border: none;
+}
+.carousel-dot[aria-selected="true"]{
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.24);
+}
+
+/* Responsive: show 1 slide on small screens, 2 on medium */
+@media (max-width: 980px) {
+  .carousel-slide { min-width: calc((100% - 20px) / 2); } /* 2 slides */
+  .carousel-slide img { height: 260px; }
+}
+@media (max-width: 640px) {
+  .carousel { gap: 8px; }
+  .carousel-btn { width:38px; height:38px; font-size:20px; }
+  .carousel-track { gap:12px; }
+  .carousel-slide { min-width: 100%; } /* 1 slide */
+  .carousel-slide img { height: 320px; }
+  .carousel-dots { margin-left:8px; }
+}
+
+    
 
     /* Footer small */
     footer{padding:18px 0;color:rgba(255,255,255,0.85); text-align:center; font-size:0.92rem}
@@ -286,37 +350,7 @@
     .spacer{height:8px}
   </style>
 </head>
-<script>
-  // Create modal container
-  const viewer = document.createElement('div');
-  viewer.id = 'img-viewer';
-  viewer.innerHTML = '<img src="" alt="Expanded View">';
-  document.body.appendChild(viewer);
 
-  const viewerImg = viewer.querySelector('img');
-
-  // Open fullscreen on image click
-  document.querySelectorAll('.glimpse-img').forEach(img => {
-    img.addEventListener('click', () => {
-      viewerImg.src = img.src;
-      viewer.style.display = "flex";
-    });
-  });
-
-  // Close when clicking anywhere outside
-  viewer.addEventListener('click', () => {
-    viewer.style.display = "none";
-    viewerImg.src = "";
-  });
-
-  // Close on ESC key
-  document.addEventListener('keyup', (e) => {
-    if (e.key === "Escape") {
-      viewer.style.display = "none";
-      viewerImg.src = "";
-    }
-  });
-</script>
 
   
 <body>
@@ -529,44 +563,50 @@
       </div>
     </section>
 
-<!-- Some glimpses from our product (CLICK-TO-ENLARGE VERSION) -->
+<!-- Some glimpses from our product (CAROUSEL) -->
 <section id="glimpses" aria-labelledby="glimpses-heading">
   <div class="container">
     <h2 id="glimpses-heading" style="color:#ffffff; margin:0 0 22px 0; font-size:28px;">
       Some glimpses from our product
     </h2>
 
-    <div class="glimpse-grid" style="
-      display:flex;
-      gap:24px;
-      justify-content:space-between;
-    ">
+    <div class="carousel" aria-roledescription="carousel">
+      <button class="carousel-btn prev" aria-label="Previous slide">‹</button>
 
-      <!-- Screenshot item -->
-      <div class="glimpse-item" style="flex:1; text-align:center; cursor:pointer;">
-        <img class="glimpse-img"
-             src="images/screenshots/audit-trails.png"
-             alt="Product screenshot 1">
-        <p class="glimpse-caption">Comprehensive Audit Trails</p>
+      <div class="carousel-track-wrapper">
+        <ul class="carousel-track">
+          <li class="carousel-slide">
+            <figure>
+              <img src="images/screenshots/audit-trails.png" alt="Comprehensive Audit Trails" />
+              <figcaption>Comprehensive Audit Trails</figcaption>
+            </figure>
+          </li>
+
+          <li class="carousel-slide">
+            <figure>
+              <img src="images/screenshots/e-signature.png" alt="Electronic Signatures for Process Approvals" />
+              <figcaption>Electronic Signatures for Process Approvals</figcaption>
+            </figure>
+          </li>
+
+          <li class="carousel-slide">
+            <figure>
+              <img src="images/screenshots/repository-page.png" alt="Document Repository for file management />
+              <figcaption>Document Repository for file management</figcaption>
+            </figure>
+          </li>
+
+          <!-- Add more slides here as <li class="carousel-slide"> ... </li> -->
+        </ul>
       </div>
 
-      <div class="glimpse-item" style="flex:1; text-align:center; cursor:pointer;">
-        <img class="glimpse-img"
-             src="images/screenshots/e-signature.png"
-             alt="Product screenshot 2">
-        <p class="glimpse-caption">Electronic Signatures for Process Approvals</p>
-      </div>
+      <button class="carousel-btn next" aria-label="Next slide">›</button>
 
-      <div class="glimpse-item" style="flex:1; text-align:center; cursor:pointer;">
-        <img class="glimpse-img"
-             src="images/screenshots/repository-page.png"
-             alt="Product screenshot 3">
-        <p class="glimpse-caption">Document Repository for file management</p>
-      </div>
-
+      <div class="carousel-dots" role="tablist" aria-label="Slide dots"></div>
     </div>
   </div>
 </section>
+
 
 
     <!-- Get in touch (section 5) -->
@@ -626,5 +666,140 @@
       ], { duration: 1600, iterations: 1, easing: 'ease-in-out' });
     })();
   </script>
+  <script>
+/* Simple accessible carousel (no deps)
+   - Shows n slides at a time depending on viewport
+   - Prev/Next controls, dots, keyboard & swipe support
+*/
+
+(function() {
+  const carousel = document.querySelector('.carousel');
+  if (!carousel) return;
+
+  const track = carousel.querySelector('.carousel-track');
+  const slides = Array.from(track.children);
+  const prevBtn = carousel.querySelector('.carousel-btn.prev');
+  const nextBtn = carousel.querySelector('.carousel-btn.next');
+  const dotsWrap = carousel.querySelector('.carousel-dots');
+
+  // Create dot buttons
+  slides.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'carousel-dot';
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Go to slide ' + (i+1));
+    btn.setAttribute('aria-selected', 'false');
+    btn.dataset.index = i;
+    dotsWrap.appendChild(btn);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  // Determine slides-to-show based on CSS breakpoints
+  function slidesToShow() {
+    const w = window.innerWidth;
+    if (w <= 640) return 1;
+    if (w <= 980) return 2;
+    return 3;
+  }
+
+  let currentIndex = 0;
+  let visible = slidesToShow();
+
+  function update() {
+    visible = slidesToShow();
+    // clamp index to valid range
+    const maxIndex = Math.max(0, slides.length - visible);
+    if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    // compute transform to show currentIndex as left-most
+    const gap = parseFloat(getComputedStyle(track).gap) || 20;
+    const offset = (slideWidth + gap) * currentIndex;
+    track.style.transform = `translateX(-${offset}px)`;
+
+    // update dots (select the dot matching leftmost visible)
+    dots.forEach((d, i) => d.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false'));
+
+    // disable buttons when at edges
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex >= slides.length - visible;
+  }
+
+  // Prev/Next handlers
+  prevBtn.addEventListener('click', () => {
+    currentIndex = Math.max(0, currentIndex - 1);
+    update();
+  });
+  nextBtn.addEventListener('click', () => {
+    currentIndex = Math.min(slides.length - visible, currentIndex + 1);
+    update();
+  });
+
+  // Dot click
+  dots.forEach(dot => dot.addEventListener('click', (e) => {
+    currentIndex = parseInt(e.currentTarget.dataset.index, 10);
+    // ensure index is valid so last dots align correct if slides>visible
+    if (currentIndex > slides.length - visible) currentIndex = slides.length - visible;
+    update();
+  }));
+
+  // Keyboard nav (left/right)
+  carousel.addEventListener('keyup', (e) => {
+    if (e.key === 'ArrowLeft') prevBtn.click();
+    if (e.key === 'ArrowRight') nextBtn.click();
+  });
+  // make carousel focusable for keyboard events
+  carousel.tabIndex = 0;
+
+  // Touch swipe support
+  let startX = 0;
+  let isDragging = false;
+  track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  }, {passive:true});
+
+  track.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const dx = e.touches[0].clientX - startX;
+    // small threshold; we won't move the track visually (keeps it simple)
+    if (Math.abs(dx) > 50) {
+      if (dx > 0) prevBtn.click();
+      else nextBtn.click();
+      isDragging = false;
+    }
+  }, {passive:true});
+
+  track.addEventListener('touchend', () => { isDragging = false; });
+
+  // Window resize: recalc sizes and update
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(update, 120);
+  });
+
+  // Initialize
+  update();
+
+  // Optional: you can enable auto-play by uncommenting below
+  /*
+  let autoplay = setInterval(() => {
+    if (currentIndex < slides.length - visible) nextBtn.click();
+    else { currentIndex = 0; update(); }
+  }, 4500);
+
+  // Pause autoplay on hover/focus
+  carousel.addEventListener('mouseenter', () => clearInterval(autoplay));
+  carousel.addEventListener('mouseleave', () => {
+    autoplay = setInterval(() => {
+      if (currentIndex < slides.length - visible) nextBtn.click();
+      else { currentIndex = 0; update(); }
+    }, 4500);
+  });
+  */
+})();
+</script>
+
 </body>
 </html>
