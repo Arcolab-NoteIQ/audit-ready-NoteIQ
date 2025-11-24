@@ -339,12 +339,39 @@
       align-items:start;
     }
 
-    .glimpse-item{
-      margin:0;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-    }
+   /* Larger screenshots for better legibility */
+.glimpse-item img {
+  width: 100%;
+  height: 520px; /* increased from 320px */
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Adjust image height for medium screens */
+@media (max-width: 1100px) {
+  .glimpse-grid-large {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .glimpse-item img {
+    height: 600px; /* taller for tablet layout */
+  }
+}
+
+/* Single-column mobile layout */
+@media (max-width: 680px) {
+  .glimpse-grid-large {
+    grid-template-columns: 1fr;
+  }
+
+  .glimpse-item img {
+    height: auto;          /* allow natural height for mobile */
+    max-height: 900px;     /* prevents browser blow-up */
+    object-fit: contain;   /* show full screenshot legibly */
+  }
+}
+
     .glimpse-btn{
       border:0;
       padding:0;
