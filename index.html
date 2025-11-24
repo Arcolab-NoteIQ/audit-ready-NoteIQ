@@ -599,11 +599,6 @@
 });
 
 
-      // ensure initial state consistent with markup
-      const initial = document.querySelector('.module-tab[aria-selected="true"]') || tabs[0];
-      if (initial) activateTab(initial);
-    })();
-
     // Glimpse modal logic (kept intact)
     (function(){
       const modal = document.getElementById('glimpse-modal');
