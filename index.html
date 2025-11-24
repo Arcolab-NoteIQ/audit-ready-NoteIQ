@@ -504,44 +504,270 @@
       </div>
     </section>
 
-<!-- Some glimpses from our product (CLICK-TO-ENLARGE VERSION) -->
-<section id="glimpses" aria-labelledby="glimpses-heading">
+<!-- Some glimpses from our product (LARGER + click-to-enlarge with caption) -->
+<section id="glimpses" aria-labelledby="glimpses-heading" style="padding-top:48px; padding-bottom:48px;">
   <div class="container">
-    <h2 id="glimpses-heading" style="color:#ffffff; margin:0 0 22px 0; font-size:28px;">
+    <h2 id="glimpses-heading" style="color:#ffffff; margin:0 0 22px 0; font-size:32px; font-weight:700;">
       Some glimpses from our product
     </h2>
 
-    <div class="glimpse-grid" style="
-      display:flex;
-      gap:24px;
-      justify-content:space-between;
-    ">
+    <!-- Gallery grid -->
+    <div class="glimpse-grid-large" role="list" aria-label="Product glimpses">
+      <!-- Item 1 -->
+      <figure class="glimpse-item" role="listitem">
+        <button class="glimpse-btn" data-src="images/screenshots/audit-trails.png"
+                data-caption="Comprehensive Audit Trails"
+                aria-label="Comprehensive Audit Trails">
+          <img src="images/screenshots/audit-trails.png"
+               alt="Product screenshot 1" />
+        </button>
+        <figcaption class="glimpse-caption">Comprehensive Audit Trails</figcaption>
+      </figure>
 
-      <!-- Screenshot item -->
-      <div class="glimpse-item" style="flex:1; text-align:center; cursor:pointer;">
-        <img class="glimpse-img"
-             src="images/screenshots/audit-trails.png"
-             alt="Product screenshot 1">
-        <p class="glimpse-caption">Comprehensive Audit Trails</p>
-      </div>
+      <!-- Item 2 -->
+      <figure class="glimpse-item" role="listitem">
+        <button class="glimpse-btn" data-src="images/screenshots/e-signature.png"
+                data-caption="Electronic Signatures for Process Approvals"
+                aria-label="Electronic Signatures for Process Approvals">
+          <img src="images/screenshots/e-signature.png"
+               alt="Product screenshot 2" />
+        </button>
+        <figcaption class="glimpse-caption">Electronic Signatures for Process Approvals</figcaption>
+      </figure>
 
-      <div class="glimpse-item" style="flex:1; text-align:center; cursor:pointer;">
-        <img class="glimpse-img"
-             src="images/screenshots/e-signature.png"
-             alt="Product screenshot 2">
-        <p class="glimpse-caption">Electronic Signatures for Process Approvals</p>
-      </div>
-
-      <div class="glimpse-item" style="flex:1; text-align:center; cursor:pointer;">
-        <img class="glimpse-img"
-             src="images/screenshots/repository-page.png"
-             alt="Product screenshot 3">
-        <p class="glimpse-caption">Document Repository for file management</p>
-      </div>
-
+      <!-- Item 3 -->
+      <figure class="glimpse-item" role="listitem">
+        <button class="glimpse-btn" data-src="images/screenshots/repository-page.png"
+                data-caption="Document Repository for file management"
+                aria-label="Document Repository for file management">
+          <img src="images/screenshots/repository-page.png"
+               alt="Product screenshot 3" />
+        </button>
+        <figcaption class="glimpse-caption">Document Repository for file management</figcaption>
+      </figure>
     </div>
   </div>
+
+  <!-- Modal: hidden by default -->
+  <div id="glimpse-modal" class="glimpse-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="glimpse-modal-caption">
+    <div class="glimpse-modal-backdrop" data-close="true"></div>
+    <div class="glimpse-modal-panel" role="document">
+      <button class="glimpse-modal-close" aria-label="Close enlarged image">&times;</button>
+      <div class="glimpse-modal-content">
+        <img id="glimpse-modal-img" src="" alt="" />
+        <p id="glimpse-modal-caption" class="glimpse-modal-caption"></p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* Grid layout — larger base screenshots */
+    .glimpse-grid-large{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:20px;
+      align-items:start;
+    }
+
+    .glimpse-item{ margin:0; display:flex; flex-direction:column; align-items:center; }
+    .glimpse-btn{
+      border:0;
+      padding:0;
+      margin:0;
+      background:transparent;
+      cursor:pointer;
+      display:block;
+      width:100%;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .glimpse-btn:focus{ outline:3px solid rgba(26,159,112,0.22); transform:translateY(-4px); }
+    .glimpse-btn:hover{ transform:translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.18); }
+
+    .glimpse-item img{
+      width:100%;
+      height:320px;                 /* much larger base size */
+      object-fit:cover;
+      display:block;
+      border-radius:12px;
+    }
+
+    .glimpse-caption{
+      margin-top:10px;
+      color:#ffffff;
+      font-size:0.98rem;
+      opacity:0.95;
+      text-align:center;
+    }
+
+    /* Modal styles */
+    .glimpse-modal{ 
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      pointer-events:none;
+    }
+    .glimpse-modal[aria-hidden="false"]{ display:flex; pointer-events:auto; }
+
+    .glimpse-modal-backdrop{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65));
+      backdrop-filter: blur(3px);
+    }
+
+    .glimpse-modal-panel{
+      position:relative;
+      max-width:1100px;
+      width:92%;
+      margin:24px;
+      z-index:2;
+      align-self:center;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      pointer-events:auto;
+    }
+
+    .glimpse-modal-close{
+      position:absolute;
+      right:-6px;
+      top:-10px;
+      background:var(--white, #ffffff);
+      color:var(--primary, #1a9f70);
+      border:0;
+      border-radius:999px;
+      width:42px;
+      height:42px;
+      font-size:24px;
+      line-height:1;
+      box-shadow:0 8px 22px rgba(0,0,0,0.18);
+      cursor:pointer;
+      z-index:5;
+    }
+
+    .glimpse-modal-content{
+      background:transparent;
+      border-radius:12px;
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+    }
+    .glimpse-modal-content img{
+      width:100%;
+      height:auto;
+      max-height:80vh;
+      border-radius:10px;
+      object-fit:contain;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+    .glimpse-modal-caption{
+      color:#ffffff;
+      font-size:1rem;
+      text-align:center;
+      max-width:90%;
+      opacity:0.95;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width:1100px){
+      .glimpse-grid-large{ grid-template-columns: repeat(2, 1fr); }
+      .glimpse-item img{ height:320px; }
+    }
+    @media (max-width:680px){
+      .glimpse-grid-large{ grid-template-columns: 1fr; }
+      .glimpse-item img{ height:420px; }
+      .glimpse-modal-panel{ width:96%; }
+    }
+  </style>
+
+  <script>
+    (function(){
+      const modal = document.getElementById('glimpse-modal');
+      const modalImg = document.getElementById('glimpse-modal-img');
+      const modalCaption = document.getElementById('glimpse-modal-caption');
+      const closeBtn = document.querySelector('.glimpse-modal-close');
+      let lastFocused = null;
+
+      // Open handler
+      document.querySelectorAll('.glimpse-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const src = btn.getAttribute('data-src');
+          const caption = btn.getAttribute('data-caption') || '';
+          const alt = btn.querySelector('img')?.alt || '';
+
+          // remember focus to return later
+          lastFocused = btn;
+
+          modalImg.src = src;
+          modalImg.alt = alt;
+          modalCaption.textContent = caption;
+
+          modal.setAttribute('aria-hidden', 'false');
+          // trap focus: move focus to close button
+          closeBtn.focus();
+
+          // prevent background scroll
+          document.documentElement.style.overflow = 'hidden';
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      // Close helper
+      function closeModal(){
+        modal.setAttribute('aria-hidden', 'true');
+        modalImg.src = '';
+        modalCaption.textContent = '';
+        // restore background scroll
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        // return focus to the last focused element
+        if(lastFocused) lastFocused.focus();
+      }
+
+      // Click outside to close
+      document.querySelectorAll('[data-close="true"]').forEach(el => {
+        el.addEventListener('click', closeModal);
+      });
+
+      // Close button
+      closeBtn.addEventListener('click', closeModal);
+
+      // Esc to close
+      document.addEventListener('keydown', function (e){
+        if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false'){
+          closeModal();
+        }
+      });
+
+      // clicking on the backdrop or outside the panel already handled by data-close element
+      // but also allow clicking on modal background (safety)
+      modal.addEventListener('click', function(e){
+        if (e.target === modal) closeModal();
+      });
+
+      // Improve accessibility: trap tab inside modal while open (simple)
+      document.addEventListener('focus', function(e){
+        if (modal.getAttribute('aria-hidden') === 'false'){
+          const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          if (focusable.length && !modal.contains(e.target)){
+            e.stopPropagation();
+            focusable[0].focus();
+          }
+        }
+      }, true);
+    })();
+  </script>
 </section>
+
 
 
 
