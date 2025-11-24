@@ -453,6 +453,36 @@
       .glimpse-item img{ height:420px; }
       .glimpse-modal-panel{ width:96%; }
     }
+    /* Mobile adjustments for logos & header */
+@media (max-width: 600px) {
+
+  /* Ensure header stays frozen */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* stronger stacking */
+    backdrop-filter: blur(6px); /* optional: smooth frosted look */
+  }
+
+  /* Logo images scale down properly */
+  .logo-img {
+    width: 120px;   /* reduce from 8rem */
+    height: auto;   /* keep proportions */
+  }
+
+  /* Reduce padding so header doesn’t take too much space */
+  .header-inner {
+    padding: 8px 14px;
+    gap: 12px;
+  }
+
+  /* Fix for the partner logo wrapper (which had fixed padding earlier) */
+  .logo > div {
+    padding: 2px !important;
+    border-radius: 4px;
+  }
+}
+
   </style>
 </head>
 
