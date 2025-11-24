@@ -231,105 +231,55 @@
       border:none;
     }
     /* Carousel styles */
-/* CAROUSEL — XL SUPER LARGE IMAGES */
-.carousel {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin-top: 12px;
+
+/* Bigger screenshots */
+.glimpse-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 3px solid rgba(255,255,255,0.15);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.20);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Prev / Next buttons */
-.carousel-btn {
-  background: rgba(255,255,255,0.18);
+.glimpse-img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+}
+
+/* Caption styling */
+.glimpse-caption {
+  margin-top: 10px;
   color: #ffffff;
-  border: none;
-  width: 54px;
-  height: 54px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 28px;
-  display: flex;
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+/* Fullscreen modal viewer */
+#img-viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.22);
-}
-.carousel-btn:hover { transform: translateY(-4px); }
-
-/* Track wrapper */
-.carousel-track-wrapper {
-  overflow: hidden;
-  flex: 1;
+  z-index: 9999;
+  cursor: zoom-out;
 }
 
-/* Track */
-.carousel-track {
-  display: flex;
-  gap: 28px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  transition: transform 420ms cubic-bezier(.2,.8,.3,1);
+#img-viewer img {
+  max-width: 92%;
+  max-height: 92%;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  animation: fadeIn 0.25s ease;
 }
 
-/* Slides — 3 on desktop, but BIGGER */
-.carousel-slide {
-  min-width: calc((100%));
-  display: block;
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
 }
-
-/* SUPER LARGE IMAGES */
-.carousel-slide img {
-  width: 100%;
-  height: 420px;   /* 🔥 WAS 260–300px — NOW MUCH BIGGER */
-  object-fit: cover;
-  border-radius: 16px;
-  border: 4px solid rgba(255,255,255,0.12);
-  box-shadow: 0 16px 38px rgba(0,0,0,0.28);
-  transition: transform 260ms ease;
-}
-.carousel-slide img:hover {
-  transform: scale(1.03);
-}
-
-/* Caption */
-.carousel-slide figcaption {
-  margin-top: 14px;
-  color: #ffffff;
-  opacity: 0.95;
-  font-size: 1.05rem;
-}
-
-/* Dot indicators */
-.carousel-dots {
-  display:flex;
-  gap:10px;
-  margin-left:16px;
-}
-.carousel-dot {
-  width:12px;
-  height:12px;
-  border-radius:50%;
-  background: rgba(255,255,255,0.26);
-  cursor:pointer;
-}
-.carousel-dot[aria-selected="true"] {
-  background: #ffffff;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.22);
-}
-
-/* RESPONSIVE — BIG BUT ADAPTIVE */
-@media (max-width: 980px) {
-  .carousel-slide { min-width: calc((100%)); }
-  .carousel-slide img { height: 380px; }  /* still huge */
-}
-@media (max-width: 640px) {
-  .carousel-slide { min-width: 100%; }
-  .carousel-slide img { height: 360px; }  /* full-height hero for mobile */
-  .carousel-btn { width:44px; height:44px; font-size:22px; }
-}
-
 
     
 
@@ -554,49 +504,45 @@
       </div>
     </section>
 
-<!-- Some glimpses from our product (CAROUSEL) -->
+<!-- Some glimpses from our product (CLICK-TO-ENLARGE VERSION) -->
 <section id="glimpses" aria-labelledby="glimpses-heading">
   <div class="container">
     <h2 id="glimpses-heading" style="color:#ffffff; margin:0 0 22px 0; font-size:28px;">
       Some glimpses from our product
     </h2>
 
-    <div class="carousel" aria-roledescription="carousel">
-      <button class="carousel-btn prev" aria-label="Previous slide">‹</button>
+    <div class="glimpse-grid" style="
+      display:flex;
+      gap:24px;
+      justify-content:space-between;
+    ">
 
-      <div class="carousel-track-wrapper">
-        <ul class="carousel-track">
-          <li class="carousel-slide">
-            <figure>
-              <img src="images/screenshots/audit-trails.png" alt="Comprehensive Audit Trails" />
-              <figcaption>Comprehensive Audit Trails</figcaption>
-            </figure>
-          </li>
-
-          <li class="carousel-slide">
-            <figure>
-              <img src="images/screenshots/e-signature.png" alt="Electronic Signatures for Process Approvals" />
-              <figcaption>Electronic Signatures for Process Approvals</figcaption>
-            </figure>
-          </li>
-
-          <li class="carousel-slide">
-            <figure>
-              <img src="images/screenshots/repository-page.png" alt="Document Repository for file management />
-              <figcaption>Document Repository for file management</figcaption>
-            </figure>
-          </li>
-
-          <!-- Add more slides here as <li class="carousel-slide"> ... </li> -->
-        </ul>
+      <!-- Screenshot item -->
+      <div class="glimpse-item" style="flex:1; text-align:center; cursor:pointer;">
+        <img class="glimpse-img"
+             src="images/screenshots/audit-trails.png"
+             alt="Product screenshot 1">
+        <p class="glimpse-caption">Comprehensive Audit Trails</p>
       </div>
 
-      <button class="carousel-btn next" aria-label="Next slide">›</button>
+      <div class="glimpse-item" style="flex:1; text-align:center; cursor:pointer;">
+        <img class="glimpse-img"
+             src="images/screenshots/e-signature.png"
+             alt="Product screenshot 2">
+        <p class="glimpse-caption">Electronic Signatures for Process Approvals</p>
+      </div>
 
-      <div class="carousel-dots" role="tablist" aria-label="Slide dots"></div>
+      <div class="glimpse-item" style="flex:1; text-align:center; cursor:pointer;">
+        <img class="glimpse-img"
+             src="images/screenshots/repository-page.png"
+             alt="Product screenshot 3">
+        <p class="glimpse-caption">Document Repository for file management</p>
+      </div>
+
     </div>
   </div>
 </section>
+
 
 
 
@@ -657,140 +603,38 @@
       ], { duration: 1600, iterations: 1, easing: 'ease-in-out' });
     })();
   </script>
-  <script>
-/* Simple accessible carousel (no deps)
-   - Shows n slides at a time depending on viewport
-   - Prev/Next controls, dots, keyboard & swipe support
-*/
+ <script>
+  // Create modal container
+  const viewer = document.createElement('div');
+  viewer.id = 'img-viewer';
+  viewer.innerHTML = '<img src="" alt="Expanded View">';
+  document.body.appendChild(viewer);
 
-(function() {
-  const carousel = document.querySelector('.carousel');
-  if (!carousel) return;
+  const viewerImg = viewer.querySelector('img');
 
-  const track = carousel.querySelector('.carousel-track');
-  const slides = Array.from(track.children);
-  const prevBtn = carousel.querySelector('.carousel-btn.prev');
-  const nextBtn = carousel.querySelector('.carousel-btn.next');
-  const dotsWrap = carousel.querySelector('.carousel-dots');
-
-  // Create dot buttons
-  slides.forEach((_, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'carousel-dot';
-    btn.type = 'button';
-    btn.setAttribute('aria-label', 'Go to slide ' + (i+1));
-    btn.setAttribute('aria-selected', 'false');
-    btn.dataset.index = i;
-    dotsWrap.appendChild(btn);
-  });
-  const dots = Array.from(dotsWrap.children);
-
-  // Determine slides-to-show based on CSS breakpoints
-  function slidesToShow() {
-    const w = window.innerWidth;
-    if (w <= 640) return 1;
-    if (w <= 980) return 2;
-    return 3;
-  }
-
-  let currentIndex = 0;
-  let visible = slidesToShow();
-
-  function update() {
-    visible = slidesToShow();
-    // clamp index to valid range
-    const maxIndex = Math.max(0, slides.length - visible);
-    if (currentIndex > maxIndex) currentIndex = maxIndex;
-
-    const slideWidth = slides[0].getBoundingClientRect().width;
-    // compute transform to show currentIndex as left-most
-    const gap = parseFloat(getComputedStyle(track).gap) || 20;
-    const offset = (slideWidth + gap) * currentIndex;
-    track.style.transform = `translateX(-${offset}px)`;
-
-    // update dots (select the dot matching leftmost visible)
-    dots.forEach((d, i) => d.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false'));
-
-    // disable buttons when at edges
-    prevBtn.disabled = currentIndex === 0;
-    nextBtn.disabled = currentIndex >= slides.length - visible;
-  }
-
-  // Prev/Next handlers
-  prevBtn.addEventListener('click', () => {
-    currentIndex = Math.max(0, currentIndex - 1);
-    update();
-  });
-  nextBtn.addEventListener('click', () => {
-    currentIndex = Math.min(slides.length - visible, currentIndex + 1);
-    update();
+  // Open fullscreen on image click
+  document.querySelectorAll('.glimpse-img').forEach(img => {
+    img.addEventListener('click', () => {
+      viewerImg.src = img.src;
+      viewer.style.display = "flex";
+    });
   });
 
-  // Dot click
-  dots.forEach(dot => dot.addEventListener('click', (e) => {
-    currentIndex = parseInt(e.currentTarget.dataset.index, 10);
-    // ensure index is valid so last dots align correct if slides>visible
-    if (currentIndex > slides.length - visible) currentIndex = slides.length - visible;
-    update();
-  }));
-
-  // Keyboard nav (left/right)
-  carousel.addEventListener('keyup', (e) => {
-    if (e.key === 'ArrowLeft') prevBtn.click();
-    if (e.key === 'ArrowRight') nextBtn.click();
+  // Close when clicking anywhere outside
+  viewer.addEventListener('click', () => {
+    viewer.style.display = "none";
+    viewerImg.src = "";
   });
-  // make carousel focusable for keyboard events
-  carousel.tabIndex = 0;
 
-  // Touch swipe support
-  let startX = 0;
-  let isDragging = false;
-  track.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-    isDragging = true;
-  }, {passive:true});
-
-  track.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-    const dx = e.touches[0].clientX - startX;
-    // small threshold; we won't move the track visually (keeps it simple)
-    if (Math.abs(dx) > 50) {
-      if (dx > 0) prevBtn.click();
-      else nextBtn.click();
-      isDragging = false;
+  // Close on ESC key
+  document.addEventListener('keyup', (e) => {
+    if (e.key === "Escape") {
+      viewer.style.display = "none";
+      viewerImg.src = "";
     }
-  }, {passive:true});
-
-  track.addEventListener('touchend', () => { isDragging = false; });
-
-  // Window resize: recalc sizes and update
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(update, 120);
   });
-
-  // Initialize
-  update();
-
-  // Optional: you can enable auto-play by uncommenting below
-  /*
-  let autoplay = setInterval(() => {
-    if (currentIndex < slides.length - visible) nextBtn.click();
-    else { currentIndex = 0; update(); }
-  }, 4500);
-
-  // Pause autoplay on hover/focus
-  carousel.addEventListener('mouseenter', () => clearInterval(autoplay));
-  carousel.addEventListener('mouseleave', () => {
-    autoplay = setInterval(() => {
-      if (currentIndex < slides.length - visible) nextBtn.click();
-      else { currentIndex = 0; update(); }
-    }, 4500);
-  });
-  */
-})();
 </script>
+
 
 </body>
 </html>
