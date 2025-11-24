@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>NoteIQ — Landing</title>
+
+  <!-- Primary stylesheet (cleaned / deduplicated) -->
   <style>
     :root{
       --primary: #1a9f70; /* main color */
@@ -40,7 +42,9 @@
 
     /* Header */
     header{
-     position:static; top:auto; z-index:auto; border-bottom: 1px solid rgba(255,255,255,0.06);
+      position:static;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: transparent;
     }
     .header-inner{
       max-width:var(--max-width);
@@ -49,6 +53,7 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
+      gap:12px;
     }
     .logo{
       display:flex;
@@ -65,6 +70,14 @@
       object-fit:contain;
     }
 
+    /* Partner logo wrapper */
+    .partner-logo-wrapper{
+      background:white;
+      border-radius:6px;
+      padding:4px;
+      display:inline-block;
+    }
+
     /* Sections */
     section{
       padding:48px 0;
@@ -79,7 +92,6 @@
       padding:32px;
     }
 
-    /* override styles moved from inline */
     .split{
       display:grid;
       grid-template-columns: 1fr 460px;
@@ -112,7 +124,7 @@
       max-width:55ch;
     }
 
-    /* Features vertical stack (moved inline -> css) */
+    /* Features vertical stack */
     .features-vertical{
       display:flex;
       flex-direction:column;
@@ -169,227 +181,135 @@
       min-height:320px;
     }
 
-/* Trust section: two-column layout matching Section 2 style */
-#trust {
-  background: linear-gradient(180deg, var(--primary-600), var(--primary));
-  color: var(--white);
-  padding-top: 48px;
-  padding-bottom: 48px;
-}
-
-/* Use grid to create left (image) and right (content) halves */
-.trust-split {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* two equal halves */
-  gap: 32px;
-  align-items: center;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 24px 20px;
-}
-
-/* Left: image container with card look */
-.trust-left {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.trust-image-card {
-  width: 100%;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.12);
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,0.06);
-  aspect-ratio: 16 / 10; /* nice wide aspect */
-}
-
-/* The actual image — keep entire image visible (no cropping) */
-.trust-image-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* ensure entire image is visible */
-  object-position: center;
-  display: block;
-  background-color: rgba(0,0,0,0.04);
-}
-
-/* Right: trust content (card) */
-.trust-right {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.trust-card {
-  background: #ffffff;
-  color: #172a27;
-  padding: 32px 36px;
-  border-radius: 18px;
-  width: 100%;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(0,0,0,0.04);
-}
-
-/* Title inside the card for visual consistency */
-.trust-card h3 {
-  margin: 0 0 14px 0;
-  font-size: 22px;
-  line-height: 1.05;
-  color: #0f2b24;
-  letter-spacing: 0.2px;
-}
-
-/* List styling */
-.trust-list {
-  list-style: none;
-  padding: 0;
-  margin: 8px 0 0 0;
-}
-
-.trust-list li {
-  display:flex;
-  gap:12px;
-  align-items:center;
-  margin-bottom:18px;
-  font-size:1.05rem;
-  color: #2c3b3a;
-}
-
-.trust-list .star {
-  font-size:1.4rem;
-  color:#f7c200;
-}
-
-/* Keep small copy readable */
-.trust-card p {
-  margin: 6px 0 0 0;
-  color: #2f3f3d;
-  font-size:0.98rem;
-}
-
-/* Responsive: stack on small screens */
-@media (max-width: 980px) {
-  .trust-split {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 18px 16px;
-  }
-
-  .trust-image-card {
-    aspect-ratio: 16 / 9;
-  }
-
-  .trust-card {
-    padding: 24px;
-  }
-}
-
-/* Accessibility: focus outline for image card if keyboard lands there */
-.trust-image-card:focus {
-  outline: 3px solid rgba(26,159,112,0.18);
-  outline-offset: 4px;
-}
-
-
-    #glimpses {
-  background: #ffffff !important;
-  color: #000000 !important;
-}
-
-#glimpses h2 {
-  color: #000000 !important;
-}
-
-.glimpse-caption {
-  color: #000000 !important;
-  opacity: 0.85;
-}
-
-/* Remove white borders from images (optional refinement) */
-.glimpse-item img {
-  border: none;
-}
-
-/* Optional: soften the card shadow against white background */
-.glimpse-btn {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-}
-
-    /* Contact */
-    #contact{
-      background: linear-gradient(180deg,var(--primary), var(--accent));
-      color:var(--white);
-    }
-    .contact-inner{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:20px;
-    }
-    @media (max-width:880px){
-      .contact-inner{flex-direction:column;align-items:flex-start}
+    /* Trust section */
+    #trust {
+      background: linear-gradient(180deg, var(--primary-600), var(--primary));
+      color: var(--white);
+      padding-top: 48px;
+      padding-bottom: 48px;
     }
 
-    .contact-details p{margin:6px 0;color:rgba(255,255,255,0.95)}
-    .contact-details .address-line{margin:2px 0;color:rgba(255,255,255,0.95)}
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      background:var(--white);
-      color:var(--primary);
-      padding:12px 18px;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:700;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
-      cursor:pointer;
-      border:none;
+    .trust-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 24px 20px;
     }
-    .btn2{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      background:#12344d;
-      color:var(--white);
-      padding:12px 18px;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:700;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
-      cursor:pointer;
-      border:none;      
+
+    .trust-left {
+      display: flex;
+      align-items: center;
       justify-content: center;
     }
 
-    /* Footer small */
-    footer{
-      padding:18px 0;
-      color:rgba(255,255,255,0.85);
-      text-align:center;
-      font-size:0.92rem
+    .trust-image-card {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.06);
+      aspect-ratio: 16 / 10;
     }
-    
-.cta-text {
-  margin-top: 28px;
-  text-align: center;
-  font-size: 1.1rem;
-  color: #0d3b2c;
-  font-weight: 600;
-  max-width: 60ch;
-  margin-left: auto;
-  margin-right: auto;
-  opacity: 0.95;
-}
 
+    .trust-image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      background-color: rgba(0,0,0,0.04);
+    }
 
+    .trust-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-    /* Utility */
-    .muted{color:rgba(255,255,255,0.85); font-size:0.96rem}
+    .trust-card {
+      background: #ffffff;
+      color: #172a27;
+      padding: 32px 36px;
+      border-radius: 18px;
+      width: 100%;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
 
-    /* Glimpses modal/grid styles (moved up so all css in one place) */
+    .trust-card h3 {
+      margin: 0 0 14px 0;
+      font-size: 22px;
+      line-height: 1.05;
+      color: #0f2b24;
+      letter-spacing: 0.2px;
+    }
+
+    .trust-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0 0;
+    }
+
+    .trust-list li {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-bottom:18px;
+      font-size:1.05rem;
+      color: #2c3b3a;
+    }
+
+    .trust-list .star {
+      font-size:1.4rem;
+      color:#f7c200;
+    }
+
+    .trust-card p {
+      margin: 6px 0 0 0;
+      color: #2f3f3d;
+      font-size:0.98rem;
+    }
+
+    @media (max-width: 980px) {
+      .trust-split {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 18px 16px;
+      }
+
+      .trust-image-card {
+        aspect-ratio: 16 / 9;
+      }
+
+      .trust-card {
+        padding: 24px;
+      }
+    }
+
+    .trust-image-card:focus {
+      outline: 3px solid rgba(26,159,112,0.18);
+      outline-offset: 4px;
+    }
+
+    /* Glimpses */
+    #glimpses {
+      background: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    #glimpses h2 {
+      color: #000000 !important;
+    }
+
+    .glimpse-caption {
+      color: #000000 !important;
+      opacity: 0.85;
+    }
+
     .glimpse-grid-large{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -397,7 +317,6 @@
       align-items:start;
     }
 
-   
     .glimpse-item{
       margin:0;
       display:flex;
@@ -417,8 +336,9 @@
       overflow:hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.12);
       transition: transform .18s ease, box-shadow .18s ease;
+      position: relative;
     }
-    
+
     .glimpse-btn:focus{
       outline:3px solid rgba(26,159,112,0.22);
       transform:translateY(-4px);
@@ -529,56 +449,129 @@
       .glimpse-item img{ height:420px; }
       .glimpse-modal-panel{ width:96%; }
     }
+
+    /* Contact */
+    #contact{
+      background: linear-gradient(180deg,var(--primary), var(--accent));
+      color:var(--white);
+    }
+    .contact-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+    }
+    @media (max-width:880px){
+      .contact-inner{flex-direction:column;align-items:flex-start}
+    }
+
+    .contact-details p{margin:6px 0;color:rgba(255,255,255,0.95)}
+    .contact-details .address-line{margin:2px 0;color:rgba(255,255,255,0.95)}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:var(--white);
+      color:var(--primary);
+      padding:12px 18px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+      cursor:pointer;
+      border:none;
+    }
+    .btn2{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:#12344d;
+      color:var(--white);
+      padding:12px 18px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+      cursor:pointer;
+      border:none;      
+      justify-content: center;
+    }
+
+    footer{
+      padding:18px 0;
+      color:rgba(255,255,255,0.85);
+      text-align:center;
+      font-size:0.92rem
+    }
+
+    .cta-text {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 1.1rem;
+      color: #0d3b2c;
+      font-weight: 600;
+      max-width: 60ch;
+      margin-left: auto;
+      margin-right: auto;
+      opacity:0.95;
+    }
+
+    .muted{color:rgba(255,255,255,0.85); font-size:0.96rem}
+
+    /* Glimpse previews responsive adjustments */
+    @media (max-width:1100px){
+      .glimpse-grid-large{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width:680px){
+      .glimpse-grid-large{ grid-template-columns: 1fr; }
+    }
+
     /* Mobile adjustments for logos & header */
-@media (max-width: 600px) {
+    @media (max-width: 600px) {
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(6px);
+      }
 
-  /* Ensure header stays frozen */
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 1000; /* stronger stacking */
-    backdrop-filter: blur(6px); /* optional: smooth frosted look */
-  }
+      .logo-img {
+        width: 120px;
+        height: auto;
+      }
 
-  /* Logo images scale down properly */
-  .logo-img {
-    width: 120px;   /* reduce from 8rem */
-    height: auto;   /* keep proportions */
-  }
+      .header-inner {
+        padding: 8px 14px;
+        gap: 12px;
+      }
 
-  /* Reduce padding so header doesn’t take too much space */
-  .header-inner {
-    padding: 8px 14px;
-    gap: 12px;
-  }
-
-  /* Fix for the partner logo wrapper (which had fixed padding earlier) */
-  .logo > div {
-    padding: 2px !important;
-    border-radius: 4px;
-  }
-}
-
-    /* Glimpse previews: show full screenshot (no clipping), responsive */
-.glimpse-item {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-/* Give each card a consistent aspect ratio for layout stability.
-   Modern browsers support aspect-ratio; we also include a fallback (padding-top). */
-.glimpse-btn {
-  display:block;
-  width:100%;
-  border-radius:12px;
-  overflow:hidden;
-  background:transparent;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  transition: transform .18s ease, box-shadow .18s ease;
-  position: relative;
-}
+      .logo > div {
+        padding: 2px !important;
+        border-radius: 4px;
+      }
+    }
   </style>
+
+  <!-- Inline-style-to-CSS injector:
+       moves previously inline styles into stylesheet form (so no element-level inline "style" attr remain) -->
+  <script>
+    (function(){
+      const css = `
+/* Previously inline styles now centralized */
+.partner-logo-wrapper{ background:white; border-radius:6px; padding:4px; }
+#glimpses-heading{ color:#ffffff; margin:0 0 22px 0; font-size:32px; font-weight:700; text-align:center; }
+#contact-heading{ margin:0 0 8px 0; }
+a[href^="mailto:"]{ color:inherit; text-decoration:underline; }
+.trust-card p { margin-top:14px; color:#2f3f3d; } /* ensures the trust copy looks as intended */
+.form-wrap { /* ensure consistent padding on small screens (keeps layout) */ padding:18px; }
+`;
+
+      const s = document.createElement('style');
+      s.setAttribute('id','injected-inline-styles');
+      s.textContent = css;
+      document.head.appendChild(s);
+    })();
+  </script>
 </head>
 
 <body>
@@ -591,9 +584,9 @@
         <img class="logo-img" src="images/Logo_NoteIQ.png" alt="NoteIQ logo">
       </a>
 
-      <!-- Right logo -->
+      <!-- Right logo (partner) -->
       <a href="https://arcolab.com/" class="logo" aria-label="Partner">
-        <div style="background:white; border-radius:6px; padding:4px;">
+        <div class="partner-logo-wrapper" aria-hidden="false">
           <img class="logo-img" src="images/arcolab-vertical-logo.png" alt="Arcolab logo">
         </div>
       </a>
@@ -651,7 +644,7 @@
                   <p>Connects smoothly with key enterprise systems like ERP, LIMS, QMS, and SAP.</p>
                 </div>
               </div>
-        
+
             </div>
 
             <p class="cta-text">
@@ -660,7 +653,7 @@
             <p class="cta-text">
               Share a few details and we’ll walk you through a quick, no-pressure demo tailored to your needs.
             </p>
-           
+
           </div>
 
           <!-- RIGHT: form script container -->
@@ -678,52 +671,47 @@
     </section>
 
     <!-- Why should you trust us? (section 3) -->
-   <section id="trust" aria-labelledby="trust-heading">
-  <div class="trust-split" role="region" aria-label="Why trust NoteIQ">
-    <!-- LEFT: image -->
-    <div class="trust-left">
-      <div class="trust-image-card" tabindex="0" aria-hidden="false" role="img" aria-label="NoteIQ platform overview">
-        <!-- Replace the src below with your actual image path -->
-        <img src="images/screenshots/workflow-photo.png" alt="NoteIQ Approach" />
+    <section id="trust" aria-labelledby="trust-heading">
+      <div class="trust-split" role="region" aria-label="Why trust NoteIQ">
+        <!-- LEFT: image -->
+        <div class="trust-left">
+          <div class="trust-image-card" tabindex="0" aria-hidden="false" role="img" aria-label="NoteIQ platform overview">
+            <img src="images/screenshots/workflow-photo.png" alt="NoteIQ Approach" />
+          </div>
+        </div>
+
+        <!-- RIGHT: trust card content -->
+        <div class="trust-right">
+          <div class="trust-card" aria-labelledby="trust-card-title">
+            <h3 id="trust-card-title">Why organizations trust NoteIQ</h3>
+
+            <ul class="trust-list" aria-label="Trust highlights">
+              <li>
+                <span class="star">⭐</span>
+                <span>Designed by experts with extensive experience in the pharmaceutical industry</span>
+              </li>
+
+              <li>
+                <span class="star">⭐</span>
+                <span>21 CFR Part 11 and Annexure 11 compliant</span>
+              </li>
+
+              <li>
+                <span class="star">⭐</span>
+                <span>Certified against <strong>ISO 27001</strong> and <strong>ISO 27701</strong> for information security and privacy</span>
+              </li>
+            </ul>
+
+            <p>We combine domain experience with enterprise-grade security practices to ensure your validation processes are compliant and auditable.</p>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <!-- RIGHT: trust card content -->
-    <div class="trust-right">
-      <div class="trust-card" aria-labelledby="trust-card-title">
-        <h3 id="trust-card-title">Why organizations trust NoteIQ</h3>
-
-        <ul class="trust-list" aria-label="Trust highlights">
-          <li>
-            <span class="star">⭐</span>
-            <span>Designed by experts with extensive experience in the pharmaceutical industry</span>
-          </li>
-
-          <li>
-            <span class="star">⭐</span>
-            <span>21 CFR Part 11 and Annexure 11 compliant</span>
-          </li>
-
-          <li>
-            <span class="star">⭐</span>
-            <span>Certified against <strong>ISO 27001</strong> and <strong>ISO 27701</strong> for information security and privacy</span>
-          </li>
-        </ul>
-
-        <p style="margin-top:14px; color:#2f3f3d;">We combine domain experience with enterprise-grade security practices to ensure your validation processes are compliant and auditable.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
+    </section>
 
     <!-- Some glimpses from our product (with modal) -->
     <section id="glimpses" aria-labelledby="glimpses-heading">
       <div class="container">
-        <h2 id="glimpses-heading" style="color:#ffffff; margin:0 0 22px 0; font-size:32px; font-weight:700; text-align:center;">
-          Some glimpses from our product
-        </h2>
+        <h2 id="glimpses-heading">Some glimpses from our product</h2>
 
         <div class="glimpse-grid-large" role="list" aria-label="Product glimpses">
           <figure class="glimpse-item" role="listitem">
@@ -777,8 +765,8 @@
       <div class="container">
         <div class="contact-inner">
           <div class="contact-details">
-            <h2 id="contact-heading" style="margin:0 0 8px 0;">Get in touch</h2>
-            <p class="muted">Email: <a href="mailto:reachus@arcolab.com" style="color:inherit; text-decoration:underline;">reachus@arcolab.com</a></p>
+            <h2 id="contact-heading">Get in touch</h2>
+            <p class="muted">Email: <a href="mailto:reachus@arcolab.com">reachus@arcolab.com</a></p>
             <div class="muted" aria-label="Address">
               <strong>Address</strong>
             </div>
@@ -811,14 +799,12 @@
       const target = document.getElementById('form-section');
       if (!target) return;
       target.scrollIntoView({behavior:'smooth', block:'center'});
+      // focus first focusable within panel after scroll
       setTimeout(() => {
         const firstInput = target.querySelector('input, textarea, select, button, [tabindex]');
         if (firstInput) firstInput.focus({preventScroll:true});
       }, 600);
     });
-
-    // Accessibility: ensure large clickable areas on feature icons
-    document.querySelectorAll('.feature').forEach(f => f.setAttribute('tabindex', '0'));
 
     // Small animation to draw attention to form on page load
     (function pulseForm(){
@@ -831,7 +817,7 @@
       ], { duration: 1600, iterations: 1, easing: 'ease-in-out' });
     })();
 
-    // Glimpse modal logic (kept intact)
+    // Glimpse modal logic
     (function(){
       const modal = document.getElementById('glimpse-modal');
       const modalImg = document.getElementById('glimpse-modal-img');
@@ -885,6 +871,7 @@
         if (e.target === modal) closeModal();
       });
 
+      // trap focus inside modal when open
       document.addEventListener('focus', function(e){
         if (modal.getAttribute('aria-hidden') === 'false'){
           const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
