@@ -169,8 +169,7 @@
       min-height:320px;
     }
 
-    /* Trust section */
-   /* Trust Section Redesign */
+/* Trust section: two-column layout matching Section 2 style */
 #trust {
   background: linear-gradient(180deg, var(--primary-600), var(--primary));
   color: var(--white);
@@ -178,80 +177,121 @@
   padding-bottom: 48px;
 }
 
-.trust-title {
-  margin: 0 0 24px;
-  font-size: 28px;
-  font-weight: 800;      /* BOLD title */
-  text-align: center;
-  letter-spacing: 0.5px;
+/* Use grid to create left (image) and right (content) halves */
+.trust-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two equal halves */
+  gap: 32px;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+/* Left: image container with card look */
+.trust-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trust-image-card {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.06);
+  aspect-ratio: 16 / 10; /* nice wide aspect */
+}
+
+/* The actual image — keep entire image visible (no cropping) */
+.trust-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* ensure entire image is visible */
+  object-position: center;
+  display: block;
+  background-color: rgba(0,0,0,0.04);
+}
+
+/* Right: trust content (card) */
+.trust-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .trust-card {
   background: #ffffff;
-  padding: 32px 40px;
+  color: #172a27;
+  padding: 32px 36px;
   border-radius: 18px;
-  max-width: 800px;
   width: 100%;
-  margin: 0 auto;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0,0,0,0.04);
 }
 
+/* Title inside the card for visual consistency */
+.trust-card h3 {
+  margin: 0 0 14px 0;
+  font-size: 22px;
+  line-height: 1.05;
+  color: #0f2b24;
+  letter-spacing: 0.2px;
+}
+
+/* List styling */
 .trust-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 8px 0 0 0;
 }
 
 .trust-list li {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-size: 1.15rem;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:18px;
+  font-size:1.05rem;
   color: #2c3b3a;
-  margin-bottom: 24px;
 }
 
-.trust-list li:last-child {
-  margin-bottom: 0;
+.trust-list .star {
+  font-size:1.4rem;
+  color:#f7c200;
 }
 
-.star {
-  font-size: 1.6rem;
-  color: #f7c200; /* Bright gold star */
+/* Keep small copy readable */
+.trust-card p {
+  margin: 6px 0 0 0;
+  color: #2f3f3d;
+  font-size:0.98rem;
 }
 
-    #trust .trust-inner{
-      display:flex;
-      flex-direction:column;
-      gap:20px;
-      align-items:center;
-      text-align:center
-    }
-    #trust p{
-      max-width:70ch;
-      margin:0 auto;
-      color:rgba(255,255,255,0.95);
-      font-size:1.02rem
-    }
+/* Responsive: stack on small screens */
+@media (max-width: 980px) {
+  .trust-split {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 18px 16px;
+  }
 
-    .three-images{
-      display:flex;
-      gap:18px;
-      margin-top:18px;
-      width:100%;
-    }
-    .three-images img{
-      width:100%;
-      height:160px;
-      object-fit:cover;
-      border-radius:10px;
-      box-shadow:0 8px 18px rgba(0,0,0,0.18);
-      border:3px solid rgba(255,255,255,0.06);
-    }
-    @media (max-width:900px){
-      .three-images{flex-direction:column}
-      .three-images img{height:220px}
-    }
+  .trust-image-card {
+    aspect-ratio: 16 / 9;
+  }
+
+  .trust-card {
+    padding: 24px;
+  }
+}
+
+/* Accessibility: focus outline for image card if keyboard lands there */
+.trust-image-card:focus {
+  outline: 3px solid rgba(26,159,112,0.18);
+  outline-offset: 4px;
+}
+
 
     /* Glimpses */
     #glimpses{
@@ -658,32 +698,44 @@
     </section>
 
     <!-- Why should you trust us? (section 3) -->
-    <section id="trust" aria-labelledby="trust-heading">
-      <div class="container trust-inner">
-        <h2 id="trust-heading" class="trust-title">
-          Why Should you trust us?
-        </h2>
-
-        <div class="trust-card">
-          <ul class="trust-list">
-            <li>
-              <span class="star">⭐</span>
-              Born out of pharma
-            </li>
-
-            <li>
-              <span class="star">⭐</span>
-              21 CFR Part 11 and Annexure 11 compliant
-            </li>
-
-            <li>
-              <span class="star">⭐</span>
-              <strong>ISO 27001</strong> and <strong>ISO 27701</strong> certified
-            </li>
-          </ul>
-        </div>
+   <section id="trust" aria-labelledby="trust-heading">
+  <div class="trust-split" role="region" aria-label="Why trust NoteIQ">
+    <!-- LEFT: image -->
+    <div class="trust-left">
+      <div class="trust-image-card" tabindex="0" aria-hidden="false" role="img" aria-label="NoteIQ platform overview">
+        <!-- Replace the src below with your actual image path -->
+        <img src="images/trust-illustration.jpg" alt="Screenshot or illustration representing NoteIQ features" />
       </div>
-    </section>
+    </div>
+
+    <!-- RIGHT: trust card content -->
+    <div class="trust-right">
+      <div class="trust-card" aria-labelledby="trust-card-title">
+        <h3 id="trust-card-title">Why Should you trust us?</h3>
+
+        <ul class="trust-list" aria-label="Trust highlights">
+          <li>
+            <span class="star">⭐</span>
+            <span>Born out of pharma</span>
+          </li>
+
+          <li>
+            <span class="star">⭐</span>
+            <span>21 CFR Part 11 and Annexure 11 compliant</span>
+          </li>
+
+          <li>
+            <span class="star">⭐</span>
+            <span><strong>ISO 27001</strong> and <strong>ISO 27701</strong> certified</span>
+          </li>
+        </ul>
+
+        <p style="margin-top:14px; color:#2f3f3d;">We combine domain experience with enterprise-grade security practices to ensure your validation processes are compliant and auditable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
     <!-- Some glimpses from our product (with modal) -->
