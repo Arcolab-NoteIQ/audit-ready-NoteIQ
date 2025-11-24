@@ -228,6 +228,7 @@
       text-align:center;
       font-size:0.92rem
     }
+    
 /* 3-column layout for contact section */
 .contact-3col {
   display: grid;
@@ -279,6 +280,7 @@
     text-align: left;
   }
 }
+
 
     /* Utility */
     .muted{color:rgba(255,255,255,0.85); font-size:0.96rem}
@@ -742,18 +744,10 @@
 <!-- Get in touch (section 5) -->
 <section id="contact" aria-labelledby="contact-heading">
   <div class="container">
-    
-    <div class="contact-inner contact-3col">
 
-      <!-- LEFT: Contact details -->
-      <div class="contact-details">
-        <h2 id="contact-heading" style="margin:0 0 8px 0;">Get in touch</h2>
-        <p class="muted">Email: hello@noteiq.example</p>
-        <p class="muted">Phone: +1 (555) 123-4567</p>
-        <p class="muted">Address: 123 Product Lane, Suite 100</p>
-      </div>
+    <div class="contact-outer">
 
-      <!-- CENTER: CTA Headline + Subtitle -->
+      <!-- CENTER: CTA Headline + Subtitle (now on top) -->
       <div class="contact-cta-text">
         <h3 class="cta-headline">
           Curious how affordable digital validation can be?
@@ -763,17 +757,15 @@
         </p>
       </div>
 
-      <!-- RIGHT: CTA Button -->
-      <div class="contact-cta-btn">
-        <button class="btn" id="reach-btn" aria-controls="form-section" title="Go to form">
-          Reach out to us
-        </button>
-      </div>
+      <!-- LEFT + RIGHT row -->
+      <div class="contact-bottom-row">
 
-    </div>
-
-  </div>
-</section>
+        <!-- LEFT: Contact details -->
+        <div class="contact-details">
+          <h2 id="contact-heading" style="margin:0 0 8px 0;">Get in touch</h2>
+          <p class="muted">Email: hello@noteiq.example</p>
+          <p class="muted">Phone: +1 (555) 123-4567</p>
+          <p cl
 
 
     <footer>
