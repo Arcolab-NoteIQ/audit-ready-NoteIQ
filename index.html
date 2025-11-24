@@ -58,9 +58,11 @@
       text-decoration:none;
     }
 
-    #logoHeader{
+    .logo-img{
       height:5rem;
       width:8rem;
+      display:block;
+      object-fit:contain;
     }
 
     /* Sections */
@@ -76,10 +78,12 @@
       box-shadow: 0 6px 24px rgba(0,0,0,0.08);
       padding:32px;
     }
+
+    /* override styles moved from inline */
     .split{
       display:grid;
       grid-template-columns: 1fr 460px;
-      gap:28px;
+      gap:40px;
       align-items:start;
     }
     @media (max-width:980px){
@@ -91,46 +95,62 @@
       color:var(--white);
     }
 
-    .hero h1{
-      margin:0 0 18px 0;
-      font-size: clamp(28px, 5vw, 44px);
-      line-height:1.02;
+    .form-heading{
+      margin:0 0 16px 0;
+      font-size:42px;
       font-weight:800;
+      line-height:1.02;
       letter-spacing:-0.02em;
       text-shadow: 0 6px 18px rgba(10,10,10,0.12);
-    }
-    .hero p{
-      margin:0 0 22px 0;
-      color:rgba(255,255,255,0.95);
-      font-size:1.05rem;
-      max-width: 60ch;
+      color:#0d3b2c;
     }
 
-    .features{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
+    .hero-lead{
+      margin:0 0 28px 0;
+      color:#1a1a1a;
+      font-size:1.05rem;
+      max-width:55ch;
+    }
+
+    /* Features vertical stack (moved inline -> css) */
+    .features-vertical{
+      display:flex;
+      flex-direction:column;
       gap:14px;
       margin-top:18px;
     }
+
     .feature{
-      background:rgba(255,255,255,0.06);
-      padding:12px 14px;
+      background:#f4f7f6;
+      padding:16px;
       border-radius:10px;
       display:flex;
       gap:12px;
       align-items:flex-start;
-      color:var(--white);
+      border:1px solid #e3e8e6;
+      color:#000;
     }
-    .feature .icon{
-      min-width:36px;
-      height:36px;
+    .feature h4{
+      margin:0 0 4px 0;
+      font-size:1.05rem;
+      color:#113b2b;
+    }
+    .feature p{
+      margin:0;
+      color:#333;
+    }
+
+    .icon{
+      min-width:40px;
+      height:40px;
       border-radius:8px;
-      background:rgba(0,0,0,0.12);
+      background:#1a9f70;
+      color:#ffffff;
       display:flex;
       align-items:center;
       justify-content:center;
-      color:var(--white);
       font-weight:700;
+      font-size:1rem;
     }
 
     /* Right column (form area) */
@@ -139,9 +159,14 @@
       border-radius:12px;
       padding:18px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border:1px solid #e8eceb;
     }
     @media (max-width:980px){
       .form-wrap{order:2}
+    }
+
+    #fs-form-root{
+      min-height:320px;
     }
 
     /* Trust section */
@@ -250,6 +275,7 @@
     }
 
     .contact-details p{margin:6px 0;color:rgba(255,255,255,0.95)}
+    .contact-details .address-line{margin:2px 0;color:rgba(255,255,255,0.95)}
     .btn{
       display:inline-flex;
       align-items:center;
@@ -289,6 +315,144 @@
 
     /* Utility */
     .muted{color:rgba(255,255,255,0.85); font-size:0.96rem}
+
+    /* Glimpses modal/grid styles (moved up so all css in one place) */
+    .glimpse-grid-large{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:50px;
+      align-items:start;
+    }
+
+    .glimpse-item{
+      margin:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+    .glimpse-btn{
+      border:0;
+      padding:0;
+      margin:0;
+      background:transparent;
+      cursor:pointer;
+      display:block;
+      width:100%;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .glimpse-btn:focus{
+      outline:3px solid rgba(26,159,112,0.22);
+      transform:translateY(-4px);
+    }
+    .glimpse-btn:hover{
+      transform:translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+    }
+
+    .glimpse-item img{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      display:block;
+      border-radius:12px;
+    }
+
+    .glimpse-caption{
+      margin-top:10px;
+      color:#ffffff;
+      font-size:0.98rem;
+      opacity:0.95;
+      text-align:center;
+    }
+
+    .glimpse-modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      pointer-events:none;
+    }
+    .glimpse-modal[aria-hidden="false"]{
+      display:flex;
+      pointer-events:auto;
+    }
+
+    .glimpse-modal-backdrop{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65));
+      backdrop-filter: blur(3px);
+    }
+
+    .glimpse-modal-panel{
+      position:relative;
+      max-width:1100px;
+      width:92%;
+      margin:24px;
+      z-index:2;
+      align-self:center;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      pointer-events:auto;
+    }
+
+    .glimpse-modal-close{
+      position:absolute;
+      right:-6px;
+      top:-10px;
+      background:var(--white, #ffffff);
+      color:var(--primary, #1a9f70);
+      border:0;
+      border-radius:999px;
+      width:42px;
+      height:42px;
+      font-size:24px;
+      line-height:1;
+      box-shadow:0 8px 22px rgba(0,0,0,0.18);
+      cursor:pointer;
+      z-index:5;
+    }
+
+    .glimpse-modal-content{
+      background:transparent;
+      border-radius:12px;
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+    }
+    .glimpse-modal-content img{
+      width:100%;
+      height:auto;
+      max-height:80vh;
+      border-radius:10px;
+      object-fit:contain;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+    .glimpse-modal-caption{
+      color:#ffffff;
+      font-size:1rem;
+      text-align:center;
+      max-width:90%;
+      opacity:0.95;
+    }
+
+    @media (max-width:1100px){
+      .glimpse-grid-large{ grid-template-columns: repeat(2, 1fr); }
+      .glimpse-item img{ height:420px; }
+    }
+    @media (max-width:680px){
+      .glimpse-grid-large{ grid-template-columns: 1fr; }
+      .glimpse-item img{ height:420px; }
+      .glimpse-modal-panel{ width:96%; }
+    }
   </style>
 </head>
 
@@ -299,13 +463,13 @@
     <div class="header-inner">
       <!-- Left logo -->
       <a href="#" class="logo" aria-label="NoteIQ Home">
-        <img id="logoHeader" src="images/Logo_NoteIQ.png" alt="NoteIQ logo">
+        <img class="logo-img" src="images/Logo_NoteIQ.png" alt="NoteIQ logo">
       </a>
 
       <!-- Right logo -->
       <a href="#" class="logo" aria-label="Partner">
-        <div style="background:white">
-          <img id="logoHeader" src="images/arcolab-vertical-logo.png" alt="Arcolab logo">
+        <div style="background:white; border-radius:6px; padding:4px;">
+          <img class="logo-img" src="images/arcolab-vertical-logo.png" alt="Arcolab logo">
         </div>
       </a>
     </div>
@@ -315,155 +479,64 @@
   <main>
 
     <!-- Form & Features (SECTION 2) -->
-    <section id="form-section" aria-labelledby="form-heading"
-             style="background:#ffffff; padding:40px 0;">
+    <section id="form-section" aria-labelledby="form-heading">
       <div class="container">
-        <div class="split" style="
-          display:grid;
-          grid-template-columns: 1fr 460px;
-          gap:40px;
-          align-items:start;
-        ">
+        <div class="split">
 
           <!-- LEFT: heading + features -->
-          <div class="hero" id="form-left" style="color:#0d3b2c;">
-            <h1 id="form-heading" style="margin:0 0 16px 0; font-size:42px; font-weight:800;">
+          <div class="hero" id="form-left">
+            <h1 id="form-heading" class="form-heading">
               Digital Validation Doesn’t Have to Break Your Budget!
             </h1>
-            <p style="max-width:55ch; color:#1a1a1a; margin-bottom:28px;">
+            <p class="hero-lead">
               NoteIQ offers a modern, fully digital validation platform that’s powerful, compliant — and priced for real-world teams.
             </p>
 
             <!-- Features (stacked vertically) -->
-            <div class="features" style="
-              display:flex;
-              flex-direction:column;
-              gap:14px;
-            ">
+            <div class="features-vertical" aria-hidden="false">
 
-              <div class="feature" style="
-                background:#f4f7f6;
-                padding:16px;
-                border-radius:10px;
-                display:flex;
-                gap:12px;
-                align-items:flex-start;
-                border:1px solid #e3e8e6;
-              ">
-                <div class="icon" style="
-                  min-width:40px;
-                  height:40px;
-                  border-radius:8px;
-                  background:#1a9f70;
-                  color:#ffffff;
-                  display:flex;
-                  align-items:center;
-                  justify-content:center;
-                  font-weight:700;
-                  font-size:1rem;
-                ">A</div>
+              <div class="feature" tabindex="0">
+                <div class="icon">A</div>
                 <div>
-                  <h4 style="margin:0 0 4px 0; font-size:1.05rem; color:#113b2b;">Flexible Configuration & Control</h4>
-                  <p style="margin:0; color:#333;">Allows easy workflow setup with controlled, role-based user access.</p>
+                  <h4>Flexible Configuration & Control</h4>
+                  <p>Allows easy workflow setup with controlled, role-based user access.</p>
                 </div>
               </div>
 
-              <div class="feature" style="
-                background:#f4f7f6;
-                padding:16px;
-                border-radius:10px;
-                display:flex;
-                gap:12px;
-                align-items:flex-start;
-                border:1px solid #e3e8e6;
-              ">
-                <div class="icon" style="
-                  min-width:40px;
-                  height:40px;
-                  border-radius:8px;
-                  background:#1a9f70;
-                  color:#ffffff;
-                  display:flex;
-                  align-items:center;
-                  justify-content:center;
-                  font-weight:700;
-                  font-size:1rem;
-                ">B</div>
+              <div class="feature" tabindex="0">
+                <div class="icon">B</div>
                 <div>
-                  <h4 style="margin:0 0 4px 0; font-size:1.05rem; color:#113b2b;">Security & Compliance</h4>
-                  <p style="margin:0; color:#333;">Ensures regulatory compliance with strong encryption and enterprise-level security.</p>
+                  <h4>Security & Compliance</h4>
+                  <p>Ensures regulatory compliance with strong encryption and enterprise-level security.</p>
                 </div>
               </div>
 
-              <div class="feature" style="
-                background:#f4f7f6;
-                padding:16px;
-                border-radius:10px;
-                display:flex;
-                gap:12px;
-                border:1px solid #e3e8e6;
-                align-items:flex-start;
-              ">
-                <div class="icon" style="
-                  min-width:40px;
-                  height:40px;
-                  border-radius:8px;
-                  background:#1a9f70;
-                  color:#ffffff;
-                  display:flex;
-                  align-items:center;
-                  justify-content:center;
-                  font-weight:700;
-                  font-size:1rem;
-                ">C</div>
+              <div class="feature" tabindex="0">
+                <div class="icon">C</div>
                 <div>
-                  <h4 style="margin:0 0 4px 0; font-size:1.05rem; color:#113b2b;">Analytics & Reporting</h4>
-                  <p style="margin:0; color:#333;">Provides real-time insights through dashboards and detailed reports.</p>
+                  <h4>Analytics & Reporting</h4>
+                  <p>Provides real-time insights through dashboards and detailed reports.</p>
                 </div>
               </div>
 
-              <div class="feature" style="
-                background:#f4f7f6;
-                padding:16px;
-                border-radius:10px;
-                display:flex;
-                gap:12px;
-                border:1px solid #e3e8e6;
-                align-items:flex-start;
-              ">
-                <div class="icon" style="
-                  min-width:40px;
-                  height:40px;
-                  border-radius:8px;
-                  background:#1a9f70;
-                  color:#ffffff;
-                  display:flex;
-                  align-items:center;
-                  justify-content:center;
-                  font-weight:700;
-                  font-size:1rem;
-                ">D</div>
+              <div class="feature" tabindex="0">
+                <div class="icon">D</div>
                 <div>
-                  <h4 style="margin:0 0 4px 0; font-size:1.05rem; color:#113b2b;">Seamless Integrations </h4>
-                  <p style="margin:0; color:#333;">Connects smoothly with key enterprise systems like ERP, LIMS, QMS, and SAP.</p>
+                  <h4>Seamless Integrations</h4>
+                  <p>Connects smoothly with key enterprise systems like ERP, LIMS, QMS, and SAP.</p>
                 </div>
               </div>
         
             </div>
+
             <p class="cta-text">
-          Ready to turn conversations into clarity? Start with NoteIQ today.
-      </p>
+              Ready to turn conversations into clarity? Start with NoteIQ today.
+            </p>
           </div>
 
           <!-- RIGHT: form script container -->
-          <div class="form-wrap" aria-label="Signup form" style="
-            background:#ffffff;
-            border-radius:12px;
-            padding:18px;
-            box-shadow:0 10px 30px rgba(0,0,0,0.08);
-            border:1px solid #e8eceb;
-          ">
-            <div id="fs-form-root" style="min-height:320px;">
+          <div class="form-wrap" aria-label="Signup form">
+            <div id="fs-form-root">
               <script src="https://arco-lab.myfreshworks.com/crm/sales/web_forms/2bd2509a7e16f4e8cbd7b953ae3f8e824d5e574d07bb9581ec1798103bc08f57/form.js"
                       crossorigin="anonymous"
                       id="fs_2bd2509a7e16f4e8cbd7b953ae3f8e824d5e574d07bb9581ec1798103bc08f57">
@@ -477,35 +550,35 @@
 
     <!-- Why should you trust us? (section 3) -->
     <section id="trust" aria-labelledby="trust-heading">
-  <div class="container trust-inner">
-    <h2 id="trust-heading" class="trust-title">
-      Why Should you trust us?
-    </h2>
+      <div class="container trust-inner">
+        <h2 id="trust-heading" class="trust-title">
+          Why Should you trust us?
+        </h2>
 
-    <div class="trust-card">
-      <ul class="trust-list">
-        <li>
-          <span class="star">⭐</span>
-          Born out of pharma
-        </li>
+        <div class="trust-card">
+          <ul class="trust-list">
+            <li>
+              <span class="star">⭐</span>
+              Born out of pharma
+            </li>
 
-        <li>
-          <span class="star">⭐</span>
-          21 CFR Part 11 and Annexure 11 compliant
-        </li>
+            <li>
+              <span class="star">⭐</span>
+              21 CFR Part 11 and Annexure 11 compliant
+            </li>
 
-        <li>
-          <span class="star">⭐</span>
-          <strong>ISO 27001</strong> and <strong>ISO 27701</strong> certified
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
+            <li>
+              <span class="star">⭐</span>
+              <strong>ISO 27001</strong> and <strong>ISO 27701</strong> certified
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
 
     <!-- Some glimpses from our product (with modal) -->
-    <section id="glimpses" aria-labelledby="glimpses-heading" style="padding-top:48px; padding-bottom:48px;">
+    <section id="glimpses" aria-labelledby="glimpses-heading">
       <div class="container">
         <h2 id="glimpses-heading" style="color:#ffffff; margin:0 0 22px 0; font-size:32px; font-weight:700; text-align:center;">
           Some glimpses from our product
@@ -556,225 +629,22 @@
         </div>
       </div>
 
-      <style>
-        .glimpse-grid-large{
-          display:grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap:50px;
-          align-items:start;
-        }
-
-        .glimpse-item{
-          margin:0;
-          display:flex;
-          flex-direction:column;
-          align-items:center;
-        }
-        .glimpse-btn{
-          border:0;
-          padding:0;
-          margin:0;
-          background:transparent;
-          cursor:pointer;
-          display:block;
-          width:100%;
-          border-radius:12px;
-          overflow:hidden;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-          transition: transform .18s ease, box-shadow .18s ease;
-        }
-        .glimpse-btn:focus{
-          outline:3px solid rgba(26,159,112,0.22);
-          transform:translateY(-4px);
-        }
-        .glimpse-btn:hover{
-          transform:translateY(-6px);
-          box-shadow: 0 16px 40px rgba(0,0,0,0.18);
-        }
-
-        .glimpse-item img{
-          width:100%;
-          height:320px;
-          object-fit:cover;
-          display:block;
-          border-radius:12px;
-        }
-
-        .glimpse-caption{
-          margin-top:10px;
-          color:#ffffff;
-          font-size:0.98rem;
-          opacity:0.95;
-          text-align:center;
-        }
-
-        .glimpse-modal{
-          position:fixed;
-          inset:0;
-          display:none;
-          align-items:center;
-          justify-content:center;
-          z-index:9999;
-          pointer-events:none;
-        }
-        .glimpse-modal[aria-hidden="false"]{
-          display:flex;
-          pointer-events:auto;
-        }
-
-        .glimpse-modal-backdrop{
-          position:absolute;
-          inset:0;
-          background:linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65));
-          backdrop-filter: blur(3px);
-        }
-
-        .glimpse-modal-panel{
-          position:relative;
-          max-width:1100px;
-          width:92%;
-          margin:24px;
-          z-index:2;
-          align-self:center;
-          display:flex;
-          flex-direction:column;
-          gap:14px;
-          pointer-events:auto;
-        }
-
-        .glimpse-modal-close{
-          position:absolute;
-          right:-6px;
-          top:-10px;
-          background:var(--white, #ffffff);
-          color:var(--primary, #1a9f70);
-          border:0;
-          border-radius:999px;
-          width:42px;
-          height:42px;
-          font-size:24px;
-          line-height:1;
-          box-shadow:0 8px 22px rgba(0,0,0,0.18);
-          cursor:pointer;
-          z-index:5;
-        }
-
-        .glimpse-modal-content{
-          background:transparent;
-          border-radius:12px;
-          padding:12px;
-          display:flex;
-          flex-direction:column;
-          align-items:center;
-          gap:12px;
-        }
-        .glimpse-modal-content img{
-          width:100%;
-          height:auto;
-          max-height:80vh;
-          border-radius:10px;
-          object-fit:contain;
-          box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-        }
-        .glimpse-modal-caption{
-          color:#ffffff;
-          font-size:1rem;
-          text-align:center;
-          max-width:90%;
-          opacity:0.95;
-        }
-
-        @media (max-width:1100px){
-          .glimpse-grid-large{ grid-template-columns: repeat(2, 1fr); }
-          .glimpse-item img{ height:420px; }
-        }
-        @media (max-width:680px){
-          .glimpse-grid-large{ grid-template-columns: 1fr; }
-          .glimpse-item img{ height:420px; }
-          .glimpse-modal-panel{ width:96%; }
-        }
-      </style>
-
-      <script>
-        (function(){
-          const modal = document.getElementById('glimpse-modal');
-          const modalImg = document.getElementById('glimpse-modal-img');
-          const modalCaption = document.getElementById('glimpse-modal-caption');
-          const closeBtn = document.querySelector('.glimpse-modal-close');
-          let lastFocused = null;
-
-          document.querySelectorAll('.glimpse-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-              e.preventDefault();
-              const src = btn.getAttribute('data-src');
-              const caption = btn.getAttribute('data-caption') || '';
-              const alt = btn.querySelector('img')?.alt || '';
-
-              lastFocused = btn;
-
-              modalImg.src = src;
-              modalImg.alt = alt;
-              modalCaption.textContent = caption;
-
-              modal.setAttribute('aria-hidden', 'false');
-              closeBtn.focus();
-
-              document.documentElement.style.overflow = 'hidden';
-              document.body.style.overflow = 'hidden';
-            });
-          });
-
-          function closeModal(){
-            modal.setAttribute('aria-hidden', 'true');
-            modalImg.src = '';
-            modalCaption.textContent = '';
-            document.documentElement.style.overflow = '';
-            document.body.style.overflow = '';
-            if(lastFocused) lastFocused.focus();
-          }
-
-          document.querySelectorAll('[data-close="true"]').forEach(el => {
-            el.addEventListener('click', closeModal);
-          });
-
-          closeBtn.addEventListener('click', closeModal);
-
-          document.addEventListener('keydown', function (e){
-            if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false'){
-              closeModal();
-            }
-          });
-
-          modal.addEventListener('click', function(e){
-            if (e.target === modal) closeModal();
-          });
-
-          document.addEventListener('focus', function(e){
-            if (modal.getAttribute('aria-hidden') === 'false'){
-              const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-              if (focusable.length && !modal.contains(e.target)){
-                e.stopPropagation();
-                focusable[0].focus();
-              }
-            }
-          }, true);
-        })();
-      </script>
     </section>
 
-<!-- Get in touch (section 5) -->
- <!-- Contact -->
+    <!-- Get in touch (section 5) -->
     <section id="contact" aria-labelledby="contact-heading">
       <div class="container">
         <div class="contact-inner">
           <div class="contact-details">
             <h2 id="contact-heading" style="margin:0 0 8px 0;">Get in touch</h2>
             <p class="muted">Email: <a href="mailto:reachus@arcolab.com" style="color:inherit; text-decoration:underline;">reachus@arcolab.com</a></p>
-            <p class="muted"><b>Address</b>
-            <p class="muted">19/2, Sarakki Village, </p>
-            <p class="muted">15th Cross Rd, Dollars Layout,</p>
-            <p class="muted">4th Phase, J.P. Nagar, </p>
-            <p class="muted">Bengaluru, Karnataka. PIN: 560078</p>
+            <div class="muted" aria-label="Address">
+              <strong>Address</strong>
+            </div>
+            <p class="contact-details address-line">19/2, Sarakki Village,</p>
+            <p class="contact-details address-line">15th Cross Rd, Dollars Layout,</p>
+            <p class="contact-details address-line">4th Phase, J.P. Nagar,</p>
+            <p class="contact-details address-line">Bengaluru, Karnataka. PIN: 560078</p>
           </div>
 
           <div>
@@ -783,8 +653,6 @@
         </div>
       </div>
     </section>
-
-
 
     <footer>
       © <span id="year"></span> NoteIQ — All rights reserved.
@@ -820,6 +688,71 @@
         { boxShadow: '0 14px 40px rgba(0,0,0,0.12)' },
         { boxShadow: '0 10px 30px rgba(0,0,0,0.08)' }
       ], { duration: 1600, iterations: 1, easing: 'ease-in-out' });
+    })();
+
+    // Glimpse modal logic (kept intact)
+    (function(){
+      const modal = document.getElementById('glimpse-modal');
+      const modalImg = document.getElementById('glimpse-modal-img');
+      const modalCaption = document.getElementById('glimpse-modal-caption');
+      const closeBtn = document.querySelector('.glimpse-modal-close');
+      let lastFocused = null;
+
+      document.querySelectorAll('.glimpse-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const src = btn.getAttribute('data-src');
+          const caption = btn.getAttribute('data-caption') || '';
+          const alt = btn.querySelector('img')?.alt || '';
+
+          lastFocused = btn;
+
+          modalImg.src = src;
+          modalImg.alt = alt;
+          modalCaption.textContent = caption;
+
+          modal.setAttribute('aria-hidden', 'false');
+          closeBtn.focus();
+
+          document.documentElement.style.overflow = 'hidden';
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function closeModal(){
+        modal.setAttribute('aria-hidden', 'true');
+        modalImg.src = '';
+        modalCaption.textContent = '';
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        if(lastFocused) lastFocused.focus();
+      }
+
+      document.querySelectorAll('[data-close="true"]').forEach(el => {
+        el.addEventListener('click', closeModal);
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+
+      document.addEventListener('keydown', function (e){
+        if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false'){
+          closeModal();
+        }
+      });
+
+      modal.addEventListener('click', function(e){
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener('focus', function(e){
+        if (modal.getAttribute('aria-hidden') === 'false'){
+          const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          if (focusable.length && !modal.contains(e.target)){
+            e.stopPropagation();
+            focusable[0].focus();
+          }
+        }
+      }, true);
     })();
   </script>
 
