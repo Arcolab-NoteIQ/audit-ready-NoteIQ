@@ -293,11 +293,29 @@
 }
 
 
-    /* Glimpses */
-    #glimpses{
-      background: linear-gradient(180deg, var(--primary-400), rgba(255,255,255,0.02));
-      color:var(--white);
-    }
+    #glimpses {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+#glimpses h2 {
+  color: #000000 !important;
+}
+
+.glimpse-caption {
+  color: #000000 !important;
+  opacity: 0.85;
+}
+
+/* Remove white borders from images (optional refinement) */
+.glimpse-item img {
+  border: none;
+}
+
+/* Optional: soften the card shadow against white background */
+.glimpse-btn {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
 
     /* Contact */
     #contact{
