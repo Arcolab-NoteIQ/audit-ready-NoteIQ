@@ -31,7 +31,7 @@
       line-height:1.4;
       scroll-behavior:smooth;
     }
-
+main { padding-top: var(--header-height); }
     .container{
       max-width:var(--max-width);
       margin:0 auto;
@@ -40,15 +40,16 @@
 
     /* Header */
     header{
-      position:sticky;
+      position:fixed;
       top:0;
-      z-index:40;
+      left:0;
+      right:0;
+      height:var(--header-height);
+      z-index:9999;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       background:rgba(10, 30, 22, 0.12);
       backdrop-filter: blur(6px);
-      height:var(--header-height);
       display:flex;
-      align-items:center;
     }
     .header-inner{
       max-width:var(--max-width);
