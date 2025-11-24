@@ -228,6 +228,57 @@
       text-align:center;
       font-size:0.92rem
     }
+/* 3-column layout for contact section */
+.contact-3col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Center block: CTA headline + subtitle */
+.contact-cta-text {
+  text-align: center;
+  padding: 0 16px;
+}
+
+.contact-cta-text .cta-headline {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.contact-cta-text .cta-subtitle {
+  margin: 8px 0 0 0;
+  font-size: 0.98rem;
+  color: rgba(255,255,255,0.92);
+  max-width: 40ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Right-side button alignment */
+.contact-cta-btn {
+  text-align: right;
+}
+
+/* Responsive stacking */
+@media (max-width: 860px) {
+  .contact-3col {
+    grid-template-columns: 1fr;
+    text-align: left;
+    gap: 32px;
+  }
+
+  .contact-cta-text {
+    text-align: center;
+  }
+
+  .contact-cta-btn {
+    text-align: left;
+  }
+}
 
     /* Utility */
     .muted{color:rgba(255,255,255,0.85); font-size:0.96rem}
@@ -688,32 +739,42 @@
       </script>
     </section>
 
-  <!-- Get in touch (section 5) -->
+<!-- Get in touch (section 5) -->
 <section id="contact" aria-labelledby="contact-heading">
   <div class="container">
     
-    <div class="contact-inner centered">
-      <div class="contact-details centered">
-        <h2 id="contact-heading" style="margin:0 0 8px 0; text-align:center;">
-          Curious how affordable digital validation can be?
-        </h2>
-        <h3 id="contact-heading" style="margin:0 0 8px 0; text-align:center;">
-          Share a few details and we’ll walk you through a quick, no-pressure demo tailored to your needs.
-        </h3>
-        <p class="muted" style="text-align:center;">Email: hello@noteiq.example</p>
-        <p class="muted" style="text-align:center;">Phone: +1 (555) 123-4567</p>
-        <p class="muted" style="text-align:center;">Address: 123 Product Lane, Suite 100</p>
+    <div class="contact-inner contact-3col">
+
+      <!-- LEFT: Contact details -->
+      <div class="contact-details">
+        <h2 id="contact-heading" style="margin:0 0 8px 0;">Get in touch</h2>
+        <p class="muted">Email: hello@noteiq.example</p>
+        <p class="muted">Phone: +1 (555) 123-4567</p>
+        <p class="muted">Address: 123 Product Lane, Suite 100</p>
       </div>
 
-      <div style="margin-top:24px; display:flex; justify-content:center;">
+      <!-- CENTER: CTA Headline + Subtitle -->
+      <div class="contact-cta-text">
+        <h3 class="cta-headline">
+          Curious how affordable digital validation can be?
+        </h3>
+        <p class="cta-subtitle">
+          Share a few details and we’ll walk you through a quick, no-pressure demo tailored to your needs.
+        </p>
+      </div>
+
+      <!-- RIGHT: CTA Button -->
+      <div class="contact-cta-btn">
         <button class="btn" id="reach-btn" aria-controls="form-section" title="Go to form">
           Reach out to us
         </button>
       </div>
+
     </div>
 
   </div>
 </section>
+
 
     <footer>
       © <span id="year"></span> NoteIQ — All rights reserved.
