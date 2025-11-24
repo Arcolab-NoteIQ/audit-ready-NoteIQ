@@ -275,7 +275,7 @@
 
 /* Slides — 3 on desktop, but BIGGER */
 .carousel-slide {
-  min-width: calc((100% - 56px) / 3);
+  min-width: calc((100%));
   display: block;
 }
 
@@ -321,12 +321,12 @@
 
 /* RESPONSIVE — BIG BUT ADAPTIVE */
 @media (max-width: 980px) {
-  .carousel-slide { min-width: calc((100% - 28px) / 2); }
-  .carousel-slide img { height: 360px; }  /* still huge */
+  .carousel-slide { min-width: calc((100%)); }
+  .carousel-slide img { height: 380px; }  /* still huge */
 }
 @media (max-width: 640px) {
   .carousel-slide { min-width: 100%; }
-  .carousel-slide img { height: 420px; }  /* full-height hero for mobile */
+  .carousel-slide img { height: 360px; }  /* full-height hero for mobile */
   .carousel-btn { width:44px; height:44px; font-size:22px; }
 }
 
